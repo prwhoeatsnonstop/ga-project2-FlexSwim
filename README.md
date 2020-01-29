@@ -1,1 +1,1 @@
-# ga-project2-keto
+ Project #2: Building Your First Full-Stack Application
