@@ -1,0 +1,48 @@
+CREATE TABLE IF NOT EXISTS users (
+	id SERIAL PRIMARY KEY,
+	name TEXT,
+	password TEXT,
+	UNIQUE (name)
+);
+
+CREATE TABLE IF NOT EXISTS user_fav_workouts (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER,
+	category_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS fav_workouts (
+	id SERIAL PRIMARY KEY,
+	category_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS category_for_fav_workouts (
+	id SERIAL PRIMARY KEY,
+	category TEXT,
+	fav_stroke_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS fav_strokes (
+	id SERIAL PRIMARY KEY,
+	stroke_type TEXT,
+	distance TEXT,
+	duration TEXT
+);
+
+CREATE TABLE IF NOT EXISTS personal_workouts (
+	id SERIAL PRIMARY KEY,
+	category_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS user_personal_workouts (
+	id SERIAL PRIMARY KEY,
+	user_id INTEGER,
+	personal_workout_id INTEGER
+);
+
+CREATE TABLE IF NOT EXISTS personal_strokes (
+	id SERIAL PRIMARY KEY,
+	stroke_type TEXT,
+	distance TEXT,
+	duration TEXT
+);
