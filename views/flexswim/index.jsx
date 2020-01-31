@@ -16,20 +16,20 @@ class Index extends React.Component {
             <p></p>
             <p></p>
             <p></p>
-            <h3>Choose a swimming workout plan from here. Click the below link</h3>
+            <h3>Personalise a swimming workout plan from here. Click the below link</h3>
             <a className='btn btn-danger' href='/new' role='button' >
                   Add a new swimming workout</a>
             <p></p>
             <p></p>
             <p></p>
-            <h3>Feeling like personalising your swim workout plan instead? Click the below link</h3>
-            <a className='btn btn-danger' href='/new' role='button' >
-                Customise a new swimming workout</a>
+            <h3>Feeling like editing your swim workout plan? Click the below link</h3>
+            <a className='btn btn-danger' href='/edit' role='button' >
+                Edit a swimming workout</a>
             <p></p>
             <p></p>
             <p></p>
             <h3>To see all your previous workouts, click here</h3>
-            <a className='btn btn-danger' href='/new' role='button' >
+            <a className='btn btn-danger' href='/show' role='button' >
                   Show all swimming workout</a>
             <p></p>
             <p></p>

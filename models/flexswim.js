@@ -13,7 +13,7 @@ module.exports = (dbPoolInstance) => {
 
   // `dbPoolInstance` is accessible within this function scope
 //suppose to be listing for all users
-  let getAll = (callback) => {
+  let getAllUsers = (callback) => {
 
     let query = 'SELECT id, name FROM users';
 
@@ -75,6 +75,7 @@ module.exports = (dbPoolInstance) => {
     let newWorkOut = (workout, callback) => {
     // set up query
     // console.log(workout);
+    //can change $ 6 to current timestamp instead (look up the syntax) and must change in personal_strokes de table, date_created as TIMESTAMP
     let queryString = 'INSERT INTO personal_strokes (stroke_type, distance, duration, user_id, done, date_created) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
     let values = [workout.stroke, workout.distance, workout.duration, workout.userId, false, moment().format('LLLL')];
     // execute query
@@ -86,24 +87,64 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
+  let showned = (user, callback) => {
+    // set up query
+    // let hashedPw = sha256(user.password + SALT);
+    let values = [user];
+    console.log(user);
+    let queryString = 'SELECT * FROM personal_strokes WHERE user_id = $1 RETURNING *';
+    // execute query
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+            if (error) {
+                console.error('error');
+            } else
+            callback(null, queryResult);
+    });
+  };
 
-  //   let show = (user, callback) => {
-  //   // set up query
-  //   let hashedPw = sha256(user.password + SALT);
-  //   let values = [user];
-  //   let queryString = 'SELECT * FROM tweets WHERE user_id=$1';
-  //   // execute query
-  //   dbPoolInstance.query(queryString, values, (error, queryResult) => {
-  //           callback(error, queryResult);
-  //   });
-  // };
+
+  let show = (user, callback) => {
+    let values = [user];
+    let queryString = 'SELECT * FROM personal_strokes WHERE user_id=$1';
+    // execute query
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+            if (error) {
+                console.error('error');
+            } else
+            callback(null, queryResult);
+    });
+  };
+
+// ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
+// ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
+// └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
+//this seems to be the same with let show =() => like the above
+  let getAllPersonalStrokes = (callback) => {
+    let values = [user];
+    let query = 'SELECT * FROM personal_strokes WHERE user_id = $1 RETURNING *';
+    dbPoolInstance.query(query, values, (error, queryResult) => {
+      if( error ){
+        callback(error, null);
+      } else {
+        if( queryResult.rows.length > 0 ){
+          callback(null, queryResult.rows);
+        } else {
+          callback(null, null);
+        }
+      }
+    });
+  };
+
+// ┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
+//  ││├┤ │  ├┤  │ ├┤   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
+// ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
   return {
-    getAll: getAll,
+    getAllUsers: getAllUsers,
     register: register,
     login: login,
-    newWorkOut: newWorkOut
-    // newTweet: newTweet,
-    // show: show
+    newWorkOut: newWorkOut,
+    show: show,
+    getAllPersonalStrokes: getAllPersonalStrokes
   };
 };

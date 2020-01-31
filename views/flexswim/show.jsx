@@ -1,17 +1,17 @@
 var React = require("react");
-
+const moment = require('moment');
 class Show extends React.Component {
   render() {
-            let d = new Date();
-            let newWorkOutArray = this.props.newWorkOut;
-            let isFalse = (newWorkOutArray) => {
-                    return newWorkOutArray.done === false;
-                }
-            let message = (newWorkOutArray) => {
-                return <option> The current swim stroke is {newWorkOutArray.stroke}, {newWorkOut.distance} in metre, {newWorkOutArray.duration} in minutes, created on {d} </option>;
-                }
-                console.log(newWorkOutArray)
-            let list = newWorkOutArray.filter(isFalse).map(message);
+    let info = this.props.show.map(show => {
+
+        let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
+
+        return (<tr><td>{show.stroke_type}</td>
+                <td>{show.distance}</td>
+                <td>{show.duration}</td>
+                <td>{time}</td></tr>
+                )
+    })
     return (
       <html>
         <head />
@@ -19,15 +19,22 @@ class Show extends React.Component {
             Show personal workouts
             </title>
         <body>
-            <h3>Completed personal workouts</h3>
+            <h3>Showing {this.props.username}'s personal workouts</h3>
             <p></p>
             <p></p>
             <p></p>
-            <h3>Personal workouts that are yet to be completed</h3>
+            <h3>Hi {this.props.username}, below are your uncompleted personal workouts
+            </h3>
                 <div>
-                        <select name="personal_stroke_id">
-                        {list}
-                        </select>
+                <table>
+                    <tr>
+                        <th>Strokes</th>
+                        <th>Distance</th>
+                        <th>Duration</th>
+                        <th>Date created</th>
+                    </tr>
+                    {info}
+                </table>
                     <p></p>
                     <p></p>
                     <p></p>
@@ -38,7 +45,8 @@ class Show extends React.Component {
             <p></p>
             <p></p>
             <h3>Wana edit a personal swimming workout? Click the below link</h3>
-                <a href='/edit'>Edit this workout</a>
+                <a className='btn btn-danger' href='/edit' role='button' >
+                Edit a swimming workout</a>
             <p></p>
             <p></p>
             <p></p>

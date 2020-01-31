@@ -143,44 +143,90 @@ module.exports = (db) => {
       });
   };
 
-// //for app.get's ('/') path
-//   let showControllerCallback = (request, response) => {
-//     let user_id = request.cookies.userId;
-//       db.flexswim.show(user_id,(error, allTweetsOfSelectedUser) => {
-//         console.log(user_id);
-//         console.log(allTweetsOfSelectedUser);
-//         let data = {
-//             allTweetsOfSelectedUser: allTweetsOfSelectedUser.rows
-//         }
-//         response.render('flexswim/show', data);
-//       });
-//   };
+//for app.get's ('/show') path <<< TODO BECAUSE PATH FOR SHOW IS NOT WORKING YET
+    let showControllerCallback = (request, response) => {
+        let userId = request.cookies.userId;
+        db.flexswim.show(userId, (error, queryResult) => {
+        if (error) {
+          console.error('error getting workout:', error);
+          response.sendStatus(500);
+        }
+            if (queryResult.rowCount >= 1) {
+                console.log('able to show');
+                console.log(queryResult.rows);
+                let username = request.cookies.username;
+                let data = {
+                userId: userId,
+                username: username,
+                show: queryResult.rows
+                };
+                response.render('flexswim/show', data);
+            } else {
+                console.log('not able to show');
+                response.redirect('/index');
+            }
+      });
+  };
 
-// //for ('/follower') path to that will lead user to a page where they can select which user to follow
-//   let followerFormControllerCallback = (request, response) => {
-//       db.flexswim.getAll((error, allUsers) => {
-//         //allUsers is array of objects [
-// //   { id: 1, name: 'nick' },
-// //   { id: 2, name: 'joe' },
-// //   { id: 3, name: 'mel' },
-// //   { id: 4, name: 'fay' },
-// //   { id: 5, name: 'alex' },
-// //   { id: 6, name: 'mich' }
-// // ]. How to convert it into an object?
-// //https://stackoverflow.com/questions/50674289/converting-array-of-objects-into-a-single-object
-//         console.log(allUsers);
-//         // const input = allUsers;
-//         //     const output = input.reduce((a, obj) => {
-//         //         a[obj.id] = obj;
-//         //         return a;
-//         //         }, {});
-//         //     console.log(output);
-//         //     let data = {
-//         //     allUsers: output
-//         //     }
-//         response.render('flexswim/newFollowerForm', {allUsers: allUsers});
-//       });
-//   };
+// ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
+// ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
+// └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
+  //for get's ('/edit') path//TO DO AS IT IS QUITE MESSY FOR NOW
+    let editFormControllerCallback = (request, response) => {
+        let user_id = request.cookies.userId;
+      db.flexswim.getAllPersonalStrokes(user_id,(error, queryResult) => {
+        if (error) {
+          console.error('error getting workout:', error);
+          response.sendStatus(500);
+        }
+            if (queryResult.rowCount >= 1) {
+                console.log('able to edit form');
+                console.log(queryResult.rows[0]);
+                let username = request.cookies.username;
+                let data = {
+                username: username,
+                user_id: user_id,
+                edit: queryResult.rows[0]
+                };
+                response.render('flexswim/edit');
+            } else {
+                console.log('workout could not be created');
+                response.redirect('/index');
+            }
+      });
+  };
+
+//for app.post's('/edit') path
+  let editControllerCallback = (request, response) => {
+      // use newWorkOut model method `create` to create new workout entry in db
+      db.flexswim.newWorkOut(request.body, (error, queryResult) => {
+        // (console log it to see for yourself)
+        if (error) {
+          console.error('error getting workout:', error);
+          response.sendStatus(500);
+        }
+            if (queryResult.rowCount >= 1) {
+                console.log('Workout created successfully');
+                // redirect to home page after creation
+                // console.log(request.body);
+                console.log(queryResult.rows[0]);
+                //curious as to why it could not print out from queryResult instead? but using request.body, it successfully printed out, probably did smth wrong
+                let data = {
+                newWorkOut: queryResult.rows[0]
+                };
+                // console.log(data);
+                // response.render('flexswim/show', data);
+                response.redirect('/index');
+            } else {
+                console.log('workout could not be created');
+                response.render('flexswim/new');
+            }
+      });
+  };
+
+// ┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
+//  ││├┤ │  ├┤  │ ├┤   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
+// ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
 //for ('/logout') path
   let logoutControllerCallback = (request, response) => {
@@ -206,8 +252,9 @@ module.exports = (db) => {
     login: loginControllerCallback,
     newForm: newFormControllerCallback,
     new: newControllerCallback,
-    // show: showControllerCallback,
-    // followerForm: followerFormControllerCallback,
+    show: showControllerCallback,
+    editForm: editFormControllerCallback,
+    edit: editControllerCallback,
     logout: logoutControllerCallback
   };
 
