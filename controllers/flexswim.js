@@ -92,47 +92,56 @@ module.exports = (db) => {
     });
   };
 
-//   //for get's ('/new') path
-//   let newFormControllerCallback = (request, response) => {
-//   // check to see if a user is logged in
-//     let user_id = request.cookies.userId;
-//     let hashedCookie = sha256(user_id + SALT);
-//     let data = {
-//         user_id: user_id
-//     }
+// ┌─┐┌┬┐┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐
+// ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
+// ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
 
-//     if( request.cookies.loggedIn === hashedCookie){
-//         // SELECT about user based on id
-//         response.render('flexswim/new', data);
-//     } else {
-//     response.send('wrong');
-//     }
-//   };
+  //for get's ('/new') path
+  let newFormControllerCallback = (request, response) => {
+  // check to see if a user is logged in
+    let user_id = request.cookies.userId;
+    let username = request.cookies.username;
+    let hashedCookie = sha256(user_id + SALT);
+    let data = {
+        user_id: user_id,
+        username: username
+    }
 
-// //for app.post's('/new') path
-//   let newControllerCallback = (request, response) => {
-//       // use newTweet model method `create` to create new tweet entry in db
-//       db.flexswim.newTweet(request.body, (error, queryResult) => {
-//         // (console log it to see for yourself)
-//         if (error) {
-//           console.error('error getting message:', error);
-//           response.sendStatus(500);
-//         }
-//             if (queryResult.rowCount >= 1) {
-//                 console.log('Message created successfully');
-//                 // redirect to home page after creation
-//                 console.log(request.body);
-//                 //curious as to why it could not print out from queryResult instead? but using request.body, it successfully printed out, probable did smth wrong
-//                 let data = {
-//                 newTweet: request.body.message
-//                 };
-//                 response.render('flexswim/newTweet', data);
-//             } else {
-//                 console.log('Message could not be created');
-//                 response.render('flexswim/new');
-//             };
-//       });
-//   };
+    if (request.cookies.loggedIn === hashedCookie){
+        // SELECT about user based on id
+        response.render('flexswim/new', data);
+    } else {
+        response.send('wrong');
+    }
+  };
+
+//for app.post's('/new') path
+  let newControllerCallback = (request, response) => {
+      // use newWorkOut model method `create` to create new workout entry in db
+      db.flexswim.newWorkOut(request.body, (error, queryResult) => {
+        // (console log it to see for yourself)
+        if (error) {
+          console.error('error getting workout:', error);
+          response.sendStatus(500);
+        }
+            if (queryResult.rowCount >= 1) {
+                console.log('Workout created successfully');
+                // redirect to home page after creation
+                // console.log(request.body);
+                console.log(queryResult.rows[0]);
+                //curious as to why it could not print out from queryResult instead? but using request.body, it successfully printed out, probably did smth wrong
+                let data = {
+                newWorkOut: queryResult.rows[0]
+                };
+                // console.log(data);
+                // response.render('flexswim/show', data);
+                response.redirect('/index');
+            } else {
+                console.log('workout could not be created');
+                response.render('flexswim/new');
+            }
+      });
+  };
 
 // //for app.get's ('/') path
 //   let showControllerCallback = (request, response) => {
@@ -195,8 +204,8 @@ module.exports = (db) => {
     register: registerControllerCallback,
     loginForm: loginFormControllerCallback,
     login: loginControllerCallback,
-    // newForm: newFormControllerCallback,
-    // new: newControllerCallback,
+    newForm: newFormControllerCallback,
+    new: newControllerCallback,
     // show: showControllerCallback,
     // followerForm: followerFormControllerCallback,
     logout: logoutControllerCallback

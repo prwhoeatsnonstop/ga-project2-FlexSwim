@@ -35,7 +35,7 @@ if( process.env.DATABASE_URL ){
   configs = {
     user: 'eunicelok',
     host: '127.0.0.1',
-    database: 'flexswim',
+    database: 'swimdb',
     port: 5432
   };
 }

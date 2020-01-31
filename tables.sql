@@ -5,6 +5,24 @@ CREATE TABLE IF NOT EXISTS users (
 	UNIQUE (name)
 );
 
+-- ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐
+-- ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
+-- ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
+
+CREATE TABLE IF NOT EXISTS personal_strokes (
+	id SERIAL PRIMARY KEY,
+	stroke_type TEXT,
+	distance INTEGER,
+	duration INTEGER,
+	user_id INTEGER,
+	done BOOLEAN,
+	date_created TIMESTAMPTZ
+);
+
+-- ┌─┐┌─┐┬  ┬┌─┐┬─┐┬┌┬┐┌─┐  ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐
+-- ├┤ ├─┤└┐┌┘│ │├┬┘│ │ ├┤   ││││ │├┬┘├┴┐│ ││ │ │
+-- └  ┴ ┴ └┘ └─┘┴└─┴ ┴ └─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
+
 CREATE TABLE IF NOT EXISTS user_fav_workouts (
 	id SERIAL PRIMARY KEY,
 	user_id INTEGER,
@@ -25,24 +43,7 @@ CREATE TABLE IF NOT EXISTS category_for_fav_workouts (
 CREATE TABLE IF NOT EXISTS fav_strokes (
 	id SERIAL PRIMARY KEY,
 	stroke_type TEXT,
-	distance TEXT,
-	duration TEXT
-);
-
-CREATE TABLE IF NOT EXISTS personal_workouts (
-	id SERIAL PRIMARY KEY,
-	category_id INTEGER
-);
-
-CREATE TABLE IF NOT EXISTS user_personal_workouts (
-	id SERIAL PRIMARY KEY,
-	user_id INTEGER,
-	personal_workout_id INTEGER
-);
-
-CREATE TABLE IF NOT EXISTS personal_strokes (
-	id SERIAL PRIMARY KEY,
-	stroke_type TEXT,
-	distance TEXT,
-	duration TEXT
+	distance INTEGER,
+	duration INTEGER,
+	user_id INTEGER
 );

@@ -22,8 +22,12 @@ module.exports = (app, allModels) => {
   app.get('/login', flexswimControllerCallbacks.loginForm);
   app.post('/login', flexswimControllerCallbacks.login);
   app.get('/logout', flexswimControllerCallbacks.logout);
-  // app.get('/new', flexswimControllerCallbacks.newForm);
-  // app.post('/new', flexswimControllerCallbacks.new);
+
+// ┌─┐┌┬┐┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐
+// ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
+// ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
+  app.get('/new', flexswimControllerCallbacks.newForm);
+  app.post('/new', flexswimControllerCallbacks.new);
   // app.get('/edit', flexswimControllerCallbacks.editForm);
   // app.put('/edit', flexswimControllerCallbacks.edit);
   // app.get('/', flexswimControllerCallbacks.show);

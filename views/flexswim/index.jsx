@@ -2,10 +2,12 @@ var React = require("react");
 
 class Index extends React.Component {
   render() {
-    //TODO: find a way to do {this.props.allTweedr[i].name} to print out the user's name because {this.props.allTweedr[0].name prints out the first name from users' table}
+
     return (
       <html>
         <head />
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossOrigin="anonymous"/>
+        <meta charSet="utf-8" />
         <title>
             Index - Home page
         </title>
@@ -14,23 +16,27 @@ class Index extends React.Component {
             <p></p>
             <p></p>
             <p></p>
-            <h3>Wana make a tweet? Click the below link</h3>
-                <a href='/new'>Create new tweet</a>
+            <h3>Choose a swimming workout plan from here. Click the below link</h3>
+            <a className='btn btn-danger' href='/new' role='button' >
+                  Add a new swimming workout</a>
             <p></p>
             <p></p>
             <p></p>
-            <h3>To see all your previous tweets, click here</h3>
-                <a href='/'>Show all tweets</a>
+            <h3>Feeling like personalising your swim workout plan instead? Click the below link</h3>
+            <a className='btn btn-danger' href='/new' role='button' >
+                Customise a new swimming workout</a>
             <p></p>
             <p></p>
             <p></p>
-            <h3>To select a user to follow, click here (This link is not working yet, TODO)</h3>
-                <a href='/addfollower'>Choose user</a>
+            <h3>To see all your previous workouts, click here</h3>
+            <a className='btn btn-danger' href='/new' role='button' >
+                  Show all swimming workout</a>
             <p></p>
             <p></p>
             <p></p>
-            <h3>Tired of tweeting? Logout from below</h3>
-            <a href="/logout">Log out</a>
+            <h3>Tired of working out? Logout from below</h3>
+            <a className='btn btn-danger' href='/logout' role='button' >
+                  Log Out</a>
         </body>
       </html>
     );

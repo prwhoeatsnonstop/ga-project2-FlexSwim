@@ -6,6 +6,8 @@
  //must npm install js-sha256 and use it here
 var sha256 = require('js-sha256');
 const SALT = "saltprotector";
+const moment = require('moment');
+
 
 module.exports = (dbPoolInstance) => {
 
@@ -44,7 +46,10 @@ module.exports = (dbPoolInstance) => {
     let queryString = 'INSERT INTO users (name, password) VALUES ($1, $2) RETURNING *';
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
-            callback(error, queryResult);
+            if (error) {
+                console.error('error');
+            } else
+            callback(null, queryResult);
     });
   };
 
@@ -55,20 +60,32 @@ module.exports = (dbPoolInstance) => {
     let queryString = 'SELECT * FROM users WHERE name=$1';
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
-            callback(error, queryResult);
+            if (error) {
+                console.error('error');
+            } else
+            callback(null, queryResult);
+            console.log(queryResult);
     });
   };
 
-  // let newTweet = (tweet, callback) => {
-  //   let queryString = 'INSERT INTO tweets (message, user_id) VALUES ($1, $2) RETURNING *';
-  //   console.log(tweet);
-  //   //values comes from request.body's de name's values
-  //   let values = [tweet.message, tweet.userId];
-  //   // execute query
-  //   dbPoolInstance.query(queryString, values, (error, queryResult) => {
-  //           callback(error, queryResult);
-  //   });
-  // };
+
+// ┌─┐┌┬┐┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐
+// ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
+// ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
+    let newWorkOut = (workout, callback) => {
+    // set up query
+    // console.log(workout);
+    let queryString = 'INSERT INTO personal_strokes (stroke_type, distance, duration, user_id, done, date_created) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
+    let values = [workout.stroke, workout.distance, workout.duration, workout.userId, false, moment().format('LLLL')];
+    // execute query
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+            if (error) {
+                console.error('error');
+            } else
+            callback(null, queryResult);
+    });
+  };
+
 
   //   let show = (user, callback) => {
   //   // set up query
@@ -84,7 +101,8 @@ module.exports = (dbPoolInstance) => {
   return {
     getAll: getAll,
     register: register,
-    login: login
+    login: login,
+    newWorkOut: newWorkOut
     // newTweet: newTweet,
     // show: show
   };
