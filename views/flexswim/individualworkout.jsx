@@ -23,6 +23,8 @@ const moment = require('moment');
 
                 <input type="submit" className="btn btn-danger" value="Delete this workout"/>
             </form>
+            <h3>Return to home if dun wana delete</h3>
+                <a href='/'>Home</a>
         </body>
         </html>
                 )

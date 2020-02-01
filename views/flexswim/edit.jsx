@@ -15,7 +15,10 @@ class Edit  extends React.Component {
                     <input type="text" name="userId" hidden value={this.props.workout.id}/>
                 </p>
                 <p>
-                    Previously chosen stroke is {this.props.workout.stroke_type} and the distance and duration are pre-filled according to previous choice as below. Do you want to change?
+                    Previously chosen stroke is {this.props.workout.stroke_type} and the distance is {this.props.workout.metres} in metres and duration is {this.props.workout.duration} in minutes are pre-filled according to previous choice as below. Do you want to change?
+                </p>
+                <p>
+                    For stroke type, not able to pre-populate data with your previous choice. Refer to above statement to recall what you previously chose as stroke. In addition, please select once more underneath to ENSURE that you have updated to the correct stroke.
                 </p>
                 <p>
                 Stroke:

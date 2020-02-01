@@ -185,16 +185,41 @@ module.exports = (db) => {
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
   //for get's ('/workout/:id/edit') path//TO DO AS IT IS QUITE MESSY FOR NOW
-    let editForm = (request, response) => {
-      db.flexswim.selectIndividualWorkOut(request.params.id, request.cookies.userId, (error, queryResult) => {
+  //   let editForm = (request, response) => {
+  //     db.flexswim.selectIndividualWorkOut(request.params.id, request.cookies.userId, (error, queryResult) => {
+  //       if (error) {
+  //         console.error('error getting workout:', error);
+  //         response.sendStatus(500);
+  //       } else {
+  //           console.log(queryResult.rows[0]);
+  //           // response.send('can edit');
+  //           response.render('flexswim/edit', {workout: queryResult.rows[0]});
+  //       }
+  //     });
+  // };
+
+  let editForm = (request, response) => {
+        let userId = request.cookies.userId;
+        db.flexswim.selectIndividualWorkOut(request.params.id, userId, (error, queryResult) => {
         if (error) {
           console.error('error getting workout:', error);
           response.sendStatus(500);
-        } else {
-            console.log(queryResult.rows[0]);
-            // response.send('can edit');
-            response.render('flexswim/edit', {workout: queryResult.rows[0]});
         }
+            if (queryResult.rowCount >= 1) {
+                console.log('able to show');
+                console.log(queryResult.rows[0]);
+                let username = request.cookies.username;
+                let data = {
+                userId: userId,
+                username: username,
+                workout: queryResult.rows[0]
+                };
+                response.render('flexswim/edit', data);
+            } else {
+                console.log('not able to show');
+                //DECIDE WHAT TO RENDER IF GOT ERROR GOING TO INDEX PAGE
+                response.send('Something is wrong with edit form! Developer please check path!');
+            }
       });
   };
 
