@@ -9,7 +9,10 @@ class Show extends React.Component {
         return (<tr><td>{show.stroke_type}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
-                <td>{time}</td></tr>
+                <td>{time}</td>
+                <td><a href="/workout/:id/edit">Edit</a></td>
+                <td><a href="/workout/:id">Delete</a></td>
+                </tr>
                 )
     })
     return (
@@ -34,6 +37,8 @@ class Show extends React.Component {
                         <th>Distance</th>
                         <th>Duration</th>
                         <th>Date created/Date updated</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
                     </tr>
                     {info}
                 </table>
@@ -44,18 +49,6 @@ class Show extends React.Component {
             <h3>Wana add more personal swimming workouts? Click the below link</h3>
                 <a className='btn btn-danger' href='/workout/new' role='button' >
                   Add a new swimming workout</a>
-            <p></p>
-            <p></p>
-            <p></p>
-            <h3>Wana edit a personal swimming workout? Click the below button</h3>
-                <a className='btn btn-danger' href='/workout/:id/edit' role='button' >
-                Edit a swimming workout</a>
-            <p></p>
-            <p></p>
-            <p></p>
-            <h3>Wana delete this personal swimming workout? Click the below button</h3>
-                <a className='btn btn-danger' href='/workout/:id' role='button' >
-                Delete a workout</a>
             <p></p>
             <p></p>
             <p></p>

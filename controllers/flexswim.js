@@ -160,7 +160,7 @@ module.exports = (db) => {
     let user_id = request.cookies.userId;
     let username = request.cookies.username;
     let hashedCookie = sha256(user_id + SALT);
-    if (request.cookies.loggedIn === hashedCookie){
+    if (request.cookies.loggedIn === hashedCookie) {
         // SELECT about user based on id
         db.flexswim.selectIndividualWorkOut(request.params.id, user_id, (error, queryResult) => {
             if (error) {
@@ -213,17 +213,13 @@ module.exports = (db) => {
 //for app.post's('/workout/:id') path
   let editPut = (request, response) => {
         let userId = request.cookies.userId;
-      db.flexswim.update(request.body, userId, (error, queryResult) => {
+      db.flexswim.updateWorkOut(request.body, userId, (error, queryResult) => {
         if (error) {
           console.error('error getting workout:', error);
           response.sendStatus(500);
         }   else {
                 console.log('Workout updated successfully');
                 console.log(queryResult.rows[0]);
-                // let data = {
-                // newWorkOut: queryResult.rows[0]
-                // };
-                // response.render('flexswim/show', data);
                 response.redirect('/');
         }
 
@@ -233,6 +229,31 @@ module.exports = (db) => {
 // ┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 //  ││├┤ │  ├┤  │ ├┤   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
+
+  let deleteWorkOut = (request, response) => {
+  // check to see if a user is logged in
+    let user_id = request.cookies.userId;
+    let username = request.cookies.username;
+    let hashedCookie = sha256(user_id + SALT);
+    let data = {
+        user_id: user_id,
+        username: username
+    }
+    if (request.cookies.loggedIn === hashedCookie){
+        db.flexswim.deleteWorkOut(request.params.id, user_id, (error, queryResult) => {
+            if (error) {
+                console.error('error getting workout:', error);
+                response.sendStatus(500);
+            } else {
+                console.log('Workout deleted successfully');
+                console.log(queryResult.rows[0]);
+                response.redirect('/');
+            }
+        });
+    } else {
+        response.send('wrong user!');
+    }
+  };
 
 //for ('/logout') path
   let logout = (request, response) => {
@@ -261,6 +282,7 @@ module.exports = (db) => {
     showIndividualWorkOut:showIndividualWorkOut,
     editForm: editForm,
     editPut: editPut,
+    deleteWorkOut: deleteWorkOut,
     logout: logout
   };
 

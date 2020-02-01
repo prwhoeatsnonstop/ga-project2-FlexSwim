@@ -2,7 +2,7 @@ var React = require("react");
 const moment = require('moment');
     class IndividualWorkout extends React.Component {
     render() {
-      const deleteURL= `/workout/${this.props.workout.id}?_method=DELETE`
+      const deleteURL= '/workout/'+this.props.workout.id+'?_method=DELETE'
       const userLink = '/users';
       //how to write this?
     return (

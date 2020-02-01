@@ -115,7 +115,7 @@ module.exports = (dbPoolInstance) => {
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
-    let update = (workout, userId, callback) => {
+    let updateWorkOut = (workout, userId, callback) => {
         // UPDATE movies SET title='minion', description='cartoon'  WHERE id = 1;
     let queryString = 'UPDATE personal_strokes SET stroke_type=$1, distance=$2, duration=$3, date_created=$4 WHERE id=$5 AND user_id=$6 RETURNING *';
     let values = [workout.stroke, workout.distance, workout.duration, moment().format('LLLL'), workout.workoutId, userId];
@@ -133,6 +133,20 @@ module.exports = (dbPoolInstance) => {
 //  ││├┤ │  ├┤  │ ├┤   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
+
+    // Delete a specific message.
+  let deleteWorkOut = (id, user_id, callback) => {
+        const workoutId = id;
+        const queryString = 'DELETE FROM personal_strokes WHERE id = $1;';
+        const values = [workoutId];
+        dbPoolInstance.query(queryString, values, (error, queryResult) => {
+            if (error) {
+                console.error('error');
+            } else
+                callback(null, queryResult);
+    });
+  }
+
   return {
     getAllUsers: getAllUsers,
     register: register,
@@ -140,6 +154,7 @@ module.exports = (dbPoolInstance) => {
     newWorkOut: newWorkOut,
     showAll: showAll,
     selectIndividualWorkOut: selectIndividualWorkOut,
-    update: update
+    updateWorkOut: updateWorkOut,
+    deleteWorkOut: deleteWorkOut
   };
 };

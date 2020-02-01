@@ -49,7 +49,7 @@ module.exports = (app, allModels) => {
 //  ││├┤ │  ├┤  │ ├┤   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
-  // app.delete('/workout/:id', flexswimControllerCallbacks.delete);
+  app.delete('/workout/:id', flexswimControllerCallbacks.deleteWorkOut);
 
   // app.get('/', flexswimControllerCallbacks.show);
   // app.get('/addfollower', flexswimControllerCallbacks.followerForm);
