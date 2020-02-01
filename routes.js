@@ -16,7 +16,7 @@ module.exports = (app, allModels) => {
   const flexswimControllerCallbacks = require('./controllers/flexswim')(allModels);
 
   app.get('/landing', flexswimControllerCallbacks.landing);
-  app.get('/index', flexswimControllerCallbacks.index);
+  app.get('/', flexswimControllerCallbacks.index);
   app.get('/register', flexswimControllerCallbacks.registerForm);
   app.post('/register', flexswimControllerCallbacks.register);
   app.get('/login', flexswimControllerCallbacks.loginForm);
@@ -34,9 +34,6 @@ module.exports = (app, allModels) => {
 // ┌─┐┬ ┬┌─┐┬ ┬  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // └─┐├─┤│ ││││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘┴ ┴└─┘└┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
-  //SHOW ALL WORKOUTS
-  app.get('/show', flexswimControllerCallbacks.showAll);
-
   //SHOW ONE WORKOUT WITH ID
   app.get('/workout/:id', flexswimControllerCallbacks.showIndividualWorkOut);
 
@@ -45,7 +42,7 @@ module.exports = (app, allModels) => {
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
   app.get('/workout/:id/edit', flexswimControllerCallbacks.editForm);
-  // app.put('/workout/:id', flexswimControllerCallbacks.edit);
+  app.put('/workout/:id', flexswimControllerCallbacks.editPut);
 
 
 // ┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐

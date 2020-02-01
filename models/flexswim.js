@@ -73,8 +73,6 @@ module.exports = (dbPoolInstance) => {
 // ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
 // ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
     let newWorkOut = (workout, callback) => {
-    // set up query
-    //can change $ 6 to current timestamp instead (look up the syntax) and must change in personal_strokes de table, date_created as TIMESTAMP
     let queryString = 'INSERT INTO personal_strokes (stroke_type, distance, duration, user_id, done, date_created) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
     let values = [workout.stroke, workout.distance, workout.duration, workout.userId, false, moment().format('LLLL')];
     // execute query
@@ -82,11 +80,12 @@ module.exports = (dbPoolInstance) => {
             if (error) {
                 console.error('error');
             } else
-            callback(null, queryResult);
+                queryResult.date_formatted = moment(queryResult.date_created).fromNow();
+                callback(null, queryResult);
     });
   };
 
-//SHOW ALL WORKOUTS OF CURRENT USER
+//SHOW ALL WORKOUTS OF CURRENT USER (FOR INDEX IN CONTROLLER)
   let showAll = (user, callback) => {
     let values = [user];
     let queryString = 'SELECT * FROM personal_strokes WHERE user_id=$1';
@@ -99,14 +98,15 @@ module.exports = (dbPoolInstance) => {
   };
 
 //SHOW INDIVIDUAL WORKOUT OF CURRENT USER
-  // Return one specific message.
   let selectIndividualWorkOut = (workOut, user, callback) => {
     let values = [workOut, user];
-    let queryString = 'SELECT personal_strokes.id, personal_strokes.stroke_type, users.name, personal_strokes.distance, personal_strokes.duration, personal_strokes.user_id, personal_strokes.date_created FROM personal_strokes INNER JOIN users ON personal_strokes.user_id = users.id WHERE personal_strokes.id = $1 AND personal_strokes.user_id = $2';
-            dbPoolInstance.query(queryString, values, (error, queryResult) => {
-            if (error) {
-                console.error('error');
-            } else
+    console.log(workOut, user)
+    let queryString = 'SELECT personal_strokes.id, personal_strokes.stroke_type, users.name, personal_strokes.distance, personal_strokes.duration, personal_strokes.user_id, personal_strokes.date_created FROM personal_strokes INNER JOIN users ON personal_strokes.user_id = users.id WHERE personal_strokes.id=$1 AND users.id=$2;';
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+        if (error) {
+            console.error('error');
+        } else
+            queryResult.date_formatted = moment(queryResult.date_created).fromNow();
             callback(null, queryResult);
     });
   };
@@ -115,20 +115,17 @@ module.exports = (dbPoolInstance) => {
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
-//this seems to be the same with let show =() => like the above
-  let getAllPersonalStrokes = (callback) => {
-    let values = [user];
-    let query = 'SELECT * FROM personal_strokes WHERE user_id = $1 RETURNING *';
-    dbPoolInstance.query(query, values, (error, queryResult) => {
-      if( error ){
-        callback(error, null);
-      } else {
-        if( queryResult.rows.length > 0 ){
-          callback(null, queryResult.rows);
-        } else {
-          callback(null, null);
-        }
-      }
+// UPDATE students SET email='bobby@example.com' WHERE name = 'Bob Jones';
+    let update = (workout, user, callback) => {
+        // UPDATE movies SET title='minion', description='cartoon'  WHERE id = 1;
+    let queryString = 'UPDATE personal_strokes SET stroke_type=$1, distance=$2, duration=$3, date_created=$4 WHERE id=$5 AND user_id=$6 RETURNING *';
+    let values = [workout.stroke, workout.distance, workout.duration, moment().format('LLLL'), workout.id, user.id];
+    // execute query
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+            if (error) {
+                console.error('error');
+            } else
+            callback(null, null, queryResult);
     });
   };
 
@@ -143,6 +140,6 @@ module.exports = (dbPoolInstance) => {
     newWorkOut: newWorkOut,
     showAll: showAll,
     selectIndividualWorkOut: selectIndividualWorkOut,
-    getAllPersonalStrokes: getAllPersonalStrokes
+    update: update
   };
 };

@@ -10,26 +10,43 @@ module.exports = (db) => {
    * ===========================================
    */
 
-//for ('/home') path and getting info from getAll in models
+//LANDING PAGE FOR USER TO LOGIN/REGISTER
   let landing = (request, response) => {
         response.render('flexswim/landing');
   };
 
+//SHOWS ALL WORKOUTS FOR CURRENT USER OR NOWORKOUTYET PAGE (FOR NEW USER AND THOSE WHO HAVE YET TO CREATE WORKOUTS)
   let index = (request, response) => {
-    let username = request.cookies.username;
-        let data = {
-            selectedUser: username
+        let userId = request.cookies.userId;
+        db.flexswim.showAll(userId, (error, queryResult) => {
+        if (error) {
+          console.error('error getting workout:', error);
+          response.sendStatus(500);
         }
-        response.render('flexswim/index', data);
+            if (queryResult.rowCount >= 1) {
+                console.log('able to show');
+                console.log(queryResult.rows);
+                let username = request.cookies.username;
+                let data = {
+                userId: userId,
+                username: username,
+                show: queryResult.rows
+                };
+                response.render('flexswim/index', data);
+            } else {
+                console.log('not able to show');
+                //DECIDE WHAT TO RENDER IF GOT ERROR GOING TO INDEX PAGE
+                response.render('flexswim/noworkoutyet', {username: request.cookies.username});
+            }
+      });
   };
 
-//for get's ('/register') path
+//FOR GET'S ('/REGISTER') PATH
   let registerForm = (request, response) => {
     response.render('flexswim/register');
-    // response.send('wana register?');
   };
 
-//for post's ('register') path
+//FOR POST'S ('/REGISTER') PATH
   let register = (request, response) => {
     //the username here is same with the queryResult in register's dbPoolInstance
     db.flexswim.register(request.body, (error, username) => {
@@ -41,23 +58,22 @@ module.exports = (db) => {
         if (username.rowCount = 1) {
             let user_id = username.rows[0].id;
             let hashedUser = sha256(user_id+SALT);
-            //'username's value is undefined, able to register and redirect to homepage d but not able to add value to 'username's in cookie yet
             response.cookie('username', username.rows[0].name);
             response.cookie('loggedIn', hashedUser);
             response.cookie('userId', user_id);
-            response.redirect('/index');
+            response.redirect('/');
         } else {
           console.log('User could not be created');
         }
         });
 };
 
-//for get's ('/login') path
+//FOR GET'S ('/LOGIN') PATH
   let loginForm = (request, response) => {
     response.render('flexswim/login');
   };
 
-//for post's ('login') path
+//FOR POST'S ('/LOGIN') PATH
   let login = (request, response) => {
     //the loginName here is same with the queryResult in login's dbPoolInstance
     db.flexswim.login(request.body, (error, loginName) => {
@@ -82,7 +98,7 @@ module.exports = (db) => {
                             response.cookie('username', request.body.name);
                             response.cookie('loggedIn', hashedUser);
                             response.cookie('userId', user_id);
-                            response.redirect('/index');
+                            response.redirect('/');
                         } else {
                         response.send('Incorrect Password!');
                         }
@@ -96,7 +112,7 @@ module.exports = (db) => {
 // ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
 // ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
 
-  //for get's ('/new') path
+//FOR GET'S ('/NEW') PATH
   let newForm = (request, response) => {
   // check to see if a user is logged in
     let user_id = request.cookies.userId;
@@ -106,36 +122,30 @@ module.exports = (db) => {
         user_id: user_id,
         username: username
     }
-
     if (request.cookies.loggedIn === hashedCookie){
         // SELECT about user based on id
         response.render('flexswim/new', data);
     } else {
-        response.send('wrong');
+        response.send('wrong user!');
     }
   };
 
-//for app.post's('/new') path
-  let postNewForm = (request, response) => {
+//FOR APP.POST'S ('/NEW') PATH
+  let postNewStroke = (request, response) => {
       // use newWorkOut model method `create` to create new workout entry in db
       db.flexswim.newWorkOut(request.body, (error, queryResult) => {
-        // (console log it to see for yourself)
         if (error) {
           console.error('error getting workout:', error);
           response.sendStatus(500);
         }
             if (queryResult.rowCount >= 1) {
                 console.log('Workout created successfully');
-                // redirect to home page after creation
-                // console.log(request.body);
                 console.log(queryResult.rows[0]);
-                //curious as to why it could not print out from queryResult instead? but using request.body, it successfully printed out, probably did smth wrong
                 let data = {
-                newWorkOut: queryResult.rows[0]
-                };
-                // console.log(data);
-                // response.render('flexswim/show', data);
-                response.redirect('/index');
+                name: request.cookies.username,
+                workout: queryResult.rows[0]
+                }
+                response.render('flexswim/newworkout', data);
             } else {
                 console.log('workout could not be created');
                 response.render('flexswim/new');
@@ -143,88 +153,69 @@ module.exports = (db) => {
       });
   };
 
-//for app.get's ('/show') path <<< TODO BECAUSE PATH FOR SHOW IS NOT WORKING YET
-    let showAll = (request, response) => {
-        let userId = request.cookies.userId;
-        db.flexswim.showAll(userId, (error, queryResult) => {
-        if (error) {
-          console.error('error getting workout:', error);
-          response.sendStatus(500);
-        }
-            if (queryResult.rowCount >= 1) {
-                console.log('able to show');
-                console.log(queryResult.rows);
-                let username = request.cookies.username;
-                let data = {
-                userId: userId,
-                username: username,
-                show: queryResult.rows
-                };
-                response.render('flexswim/show', data);
+
+//FOR GET'S ('/WORKOUT/:ID') PATH
+  let showIndividualWorkOut = (request, response) => {
+  // check to see if a user is logged in
+    let user_id = request.cookies.userId;
+    let username = request.cookies.username;
+    let hashedCookie = sha256(user_id + SALT);
+    if (request.cookies.loggedIn === hashedCookie){
+        // SELECT about user based on id
+        db.flexswim.selectIndividualWorkOut(request.params.id, user_id, (error, queryResult) => {
+            if (error) {
+                console.error('error getting workout:', error);
+                response.sendStatus(500);
             } else {
-                console.log('not able to show');
-                response.redirect('/index');
-            }
-      });
+                console.log(queryResult.rows[0]);
+                let data = {
+                    workout: queryResult.rows[0],
+                    name: username
+                }
+                response.render('flexswim/individualworkout', data);
+            };
+        });
+    } else {
+        response.send('wrong user!');
+    }
   };
 
-  let showIndividualWorkOut = (request, response) => {
-      db.flexswim.selectIndividualWorkOut(request.params.id, request.cookies.userId, (error, queryResult) => {
-        if (error) {
-          console.error('error getting pokemon:', error);
-          response.sendStatus(500);
-        } else {
-            console.log(queryResult.rows[0]);
-            response.send({workout: queryResult.rows[0]});
-            //need to repair the individual workout page
-            // response.render('flexswim/individualworkout', {workout: queryResult.rows[0]});
-        }
-      });
-  };
 
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
-  //for get's ('/edit') path//TO DO AS IT IS QUITE MESSY FOR NOW
+  //for get's ('/workout/:id/edit') path//TO DO AS IT IS QUITE MESSY FOR NOW
     let editForm = (request, response) => {
       db.flexswim.selectIndividualWorkOut(request.params.id, request.cookies.userId, (error, queryResult) => {
         if (error) {
-          console.error('error getting pokemon:', error);
+          console.error('error getting workout:', error);
           response.sendStatus(500);
         } else {
             console.log(queryResult.rows[0]);
             // response.send('can edit');
             response.render('flexswim/edit', {workout: queryResult.rows[0]});
-            //need to repair the individual workout page
-            // response.render('flexswim/individualworkout', {workout: queryResult.rows[0]});
         }
       });
   };
 
-//for app.post's('/edit') path
-  let edit = (request, response) => {
-      // use newWorkOut model method `create` to create new workout entry in db
-      db.flexswim.newWorkOut(request.body, (error, queryResult) => {
-        // (console log it to see for yourself)
+//for app.post's('/workout/:id') path
+  let editPut = (request, response) => {
+      db.flexswim.update(request.body, (error, queryResult) => {
         if (error) {
           console.error('error getting workout:', error);
           response.sendStatus(500);
         }
-            if (queryResult.rowCount >= 1) {
-                console.log('Workout created successfully');
-                // redirect to home page after creation
-                // console.log(request.body);
-                console.log(queryResult.rows[0]);
-                //curious as to why it could not print out from queryResult instead? but using request.body, it successfully printed out, probably did smth wrong
+            if (queryResult.rows >= 0) {
+                console.log('Workout updated successfully');
+                console.log(queryResult.rows);
                 let data = {
                 newWorkOut: queryResult.rows[0]
                 };
-                // console.log(data);
                 // response.render('flexswim/show', data);
                 response.redirect('/index');
             } else {
-                console.log('workout could not be created');
-                response.render('flexswim/new');
+                console.log('workout could not be updated');
+                response.render('flexswim/edit');
             }
       });
   };
@@ -256,11 +247,10 @@ module.exports = (db) => {
     loginForm: loginForm,
     login: login,
     newForm: newForm,
-    new: postNewForm,
-    showAll: showAll,
+    new: postNewStroke,
     showIndividualWorkOut:showIndividualWorkOut,
     editForm: editForm,
-    edit: edit,
+    editPut: editPut,
     logout: logout
   };
 

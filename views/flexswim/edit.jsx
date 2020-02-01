@@ -3,12 +3,6 @@ var React = require("react");
 class Edit  extends React.Component {
   render() {
           const url= '/workout/'+this.props.workout.id+'?_method=PUT';
-//           '<form method="POST" action="/pokemon/'+pokemon.id+'?_method=put">'+
-//   '<div class="pokemon-attribute">'+
-//     'id: <input name="id" type="text" value="'+pokemon.id+'"/>'+
-//     'name: <input name="name" type="text" value="'+pokemon.name+'"/>'+
-//   '</div>'+
-// '</form>';
     return (
       <html>
         <head/>
@@ -25,7 +19,7 @@ class Edit  extends React.Component {
                 </p>
                 <p>
                 Stroke:
-                <select name="stroke">
+                <select name="stroke" required>
                     <option value="freestyle">Freestyle</option>
                     <option value="breastroke">Breastroke</option>
                     <option value="backstroke">Backstroke</option>

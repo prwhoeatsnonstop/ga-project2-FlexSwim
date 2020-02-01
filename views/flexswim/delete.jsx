@@ -1,6 +1,7 @@
 var React = require("react");
 const moment = require('moment');
-    class IndividualWorkout extends React.Component {
+//THIS IS BACK UP FILE
+    class Delete extends React.Component {
     render() {
       const deleteURL= `/workout/${this.props.workout.id}?_method=DELETE`
       const userLink = '/users';
@@ -29,4 +30,4 @@ const moment = require('moment');
   }
 }
 
-module.exports = IndividualWorkout;
+module.exports = Delete;
