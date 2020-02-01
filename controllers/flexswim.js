@@ -184,20 +184,6 @@ module.exports = (db) => {
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
-  //for get's ('/workout/:id/edit') path//TO DO AS IT IS QUITE MESSY FOR NOW
-  //   let editForm = (request, response) => {
-  //     db.flexswim.selectIndividualWorkOut(request.params.id, request.cookies.userId, (error, queryResult) => {
-  //       if (error) {
-  //         console.error('error getting workout:', error);
-  //         response.sendStatus(500);
-  //       } else {
-  //           console.log(queryResult.rows[0]);
-  //           // response.send('can edit');
-  //           response.render('flexswim/edit', {workout: queryResult.rows[0]});
-  //       }
-  //     });
-  // };
-
   let editForm = (request, response) => {
         let userId = request.cookies.userId;
         db.flexswim.selectIndividualWorkOut(request.params.id, userId, (error, queryResult) => {
@@ -212,6 +198,7 @@ module.exports = (db) => {
                 let data = {
                 userId: userId,
                 username: username,
+                id: request.params.id,
                 workout: queryResult.rows[0]
                 };
                 response.render('flexswim/edit', data);
@@ -225,23 +212,21 @@ module.exports = (db) => {
 
 //for app.post's('/workout/:id') path
   let editPut = (request, response) => {
-      db.flexswim.update(request.body, (error, queryResult) => {
+        let userId = request.cookies.userId;
+      db.flexswim.update(request.body, userId, (error, queryResult) => {
         if (error) {
           console.error('error getting workout:', error);
           response.sendStatus(500);
-        }
-            if (queryResult.rows >= 0) {
+        }   else {
                 console.log('Workout updated successfully');
-                console.log(queryResult.rows);
-                let data = {
-                newWorkOut: queryResult.rows[0]
-                };
+                console.log(queryResult.rows[0]);
+                // let data = {
+                // newWorkOut: queryResult.rows[0]
+                // };
                 // response.render('flexswim/show', data);
-                response.redirect('/index');
-            } else {
-                console.log('workout could not be updated');
-                response.render('flexswim/edit');
-            }
+                response.redirect('/');
+        }
+
       });
   };
 

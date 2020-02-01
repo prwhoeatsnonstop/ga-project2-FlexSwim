@@ -33,7 +33,7 @@ class Show extends React.Component {
                         <th>Strokes</th>
                         <th>Distance</th>
                         <th>Duration</th>
-                        <th>Date created</th>
+                        <th>Date created/Date updated</th>
                     </tr>
                     {info}
                 </table>
