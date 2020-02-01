@@ -182,58 +182,22 @@ module.exports = (db) => {
       });
   };
 
-  // //SHOW ONE WORKOUT WITH ID
-  //     let showIndividualWorkOut = (request, response) => {
-  //       let workOutId = request.params.id;
-  //       db.flexswim.selectIndividualWorkOut(workOutId, (error, queryResult) => {
-  //       if (error) {
-  //         console.error('error getting workout:', error);
-  //         response.sendStatus(500);
-  //       }
-  //           if (queryResult.rowCount >= 1) {
-  //               console.log('able to show');
-  //               console.log(queryResult.rows);
-  //               let username = request.cookies.username;
-  //               let data = {
-  //               workOutId: workOutId,
-  //               username: username,
-  //               workout: queryResult.rows
-  //               };
-  //               response.send('can show individual workout!!!');
-  //               // response.render('flexswim/individualworkout', data);
-  //           } else {
-  //               console.log('not able to show');
-  //               response.redirect('/index');
-  //           }
-  //     });
-  // };
-
-
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
   //for get's ('/edit') path//TO DO AS IT IS QUITE MESSY FOR NOW
     let editForm = (request, response) => {
-        let user_id = request.cookies.userId;
-      db.flexswim.getAllPersonalStrokes(user_id,(error, queryResult) => {
+      db.flexswim.selectIndividualWorkOut(request.params.id, request.cookies.userId, (error, queryResult) => {
         if (error) {
-          console.error('error getting workout:', error);
+          console.error('error getting pokemon:', error);
           response.sendStatus(500);
+        } else {
+            console.log(queryResult.rows[0]);
+            // response.send('can edit');
+            response.render('flexswim/edit', {workout: queryResult.rows[0]});
+            //need to repair the individual workout page
+            // response.render('flexswim/individualworkout', {workout: queryResult.rows[0]});
         }
-            if (queryResult.rowCount >= 1) {
-                console.log('able to edit form');
-                console.log(queryResult.rows[0]);
-                let username = request.cookies.username;
-                let data = {
-                username: username,
-                user_id: user_id,
-                edit: queryResult.rows[0]
-                };
-                response.render('flexswim/edit');
-            } else {
-                console.log('workout could not be created');
-                response.redirect('/index');
-            }
       });
   };
 

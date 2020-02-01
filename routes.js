@@ -44,7 +44,7 @@ module.exports = (app, allModels) => {
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
-  // app.get('/workout/:id/edit', flexswimControllerCallbacks.editForm);
+  app.get('/workout/:id/edit', flexswimControllerCallbacks.editForm);
   // app.put('/workout/:id', flexswimControllerCallbacks.edit);
 
 
