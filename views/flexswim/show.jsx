@@ -40,18 +40,18 @@ class Show extends React.Component {
                     <p></p>
                 </div>
             <h3>Wana make a new personal swimming workout? Click the below link</h3>
-                <a href='/new'>Create new swimstroke</a>
+                <a href='/workout/new'>Create new swimstroke</a>
             <p></p>
             <p></p>
             <p></p>
             <h3>Wana edit a personal swimming workout? Click the below link</h3>
-                <a className='btn btn-danger' href='/edit' role='button' >
+                <a className='btn btn-danger' href='/workout/:id/edit' role='button' >
                 Edit a swimming workout</a>
             <p></p>
             <p></p>
             <p></p>
             <h3>Wana delete this personal swimming workout? Click the below link</h3>
-                <a href='/delete'>Delete this workout</a>
+                <a href='/workout/:id'>Delete this workout</a>
             <p></p>
             <p></p>
             <p></p>

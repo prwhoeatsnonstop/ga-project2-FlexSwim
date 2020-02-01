@@ -74,7 +74,6 @@ module.exports = (dbPoolInstance) => {
 // ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
     let newWorkOut = (workout, callback) => {
     // set up query
-    // console.log(workout);
     //can change $ 6 to current timestamp instead (look up the syntax) and must change in personal_strokes de table, date_created as TIMESTAMP
     let queryString = 'INSERT INTO personal_strokes (stroke_type, distance, duration, user_id, done, date_created) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *';
     let values = [workout.stroke, workout.distance, workout.duration, workout.userId, false, moment().format('LLLL')];
@@ -87,26 +86,10 @@ module.exports = (dbPoolInstance) => {
     });
   };
 
-  let showned = (user, callback) => {
-    // set up query
-    // let hashedPw = sha256(user.password + SALT);
-    let values = [user];
-    console.log(user);
-    let queryString = 'SELECT * FROM personal_strokes WHERE user_id = $1 RETURNING *';
-    // execute query
-    dbPoolInstance.query(queryString, values, (error, queryResult) => {
-            if (error) {
-                console.error('error');
-            } else
-            callback(null, queryResult);
-    });
-  };
-
-
-  let show = (user, callback) => {
+//SHOW ALL WORKOUTS OF CURRENT USER
+  let showAll = (user, callback) => {
     let values = [user];
     let queryString = 'SELECT * FROM personal_strokes WHERE user_id=$1';
-    // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
                 console.error('error');
@@ -114,6 +97,20 @@ module.exports = (dbPoolInstance) => {
             callback(null, queryResult);
     });
   };
+
+//SHOW INDIVIDUAL WORKOUT OF CURRENT USER
+  // Return one specific message.
+  let selectIndividualWorkOut = (workOut, user, callback) => {
+    let values = [workOut, user];
+    let queryString = 'SELECT personal_strokes.id, personal_strokes.stroke_type, users.name, personal_strokes.distance, personal_strokes.duration, personal_strokes.user_id, personal_strokes.date_created FROM personal_strokes INNER JOIN users ON personal_strokes.user_id = users.id WHERE personal_strokes.id = $1 AND personal_strokes.user_id = $2';
+            dbPoolInstance.query(queryString, values, (error, queryResult) => {
+            if (error) {
+                console.error('error');
+            } else
+            callback(null, queryResult);
+    });
+  };
+
 
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
@@ -144,7 +141,8 @@ module.exports = (dbPoolInstance) => {
     register: register,
     login: login,
     newWorkOut: newWorkOut,
-    show: show,
+    showAll: showAll,
+    selectIndividualWorkOut: selectIndividualWorkOut,
     getAllPersonalStrokes: getAllPersonalStrokes
   };
 };

@@ -8,7 +8,7 @@ class New extends React.Component {
             <title>Create a new workout!</title>
         <body>
             <h1>Hi {this.props.username}, wana add a new Swim Work Out? Do it here!</h1>
-            <form method="POST" action="/new">
+            <form method="POST" action="/workout">
                 <p>
                     <input type="text" name="userId" hidden value={this.props.user_id}/>
                 </p>

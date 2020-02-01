@@ -11,11 +11,11 @@ module.exports = (db) => {
    */
 
 //for ('/home') path and getting info from getAll in models
-  let landingControllerCallback = (request, response) => {
+  let landing = (request, response) => {
         response.render('flexswim/landing');
   };
 
-  let indexControllerCallback = (request, response) => {
+  let index = (request, response) => {
     let username = request.cookies.username;
         let data = {
             selectedUser: username
@@ -24,13 +24,13 @@ module.exports = (db) => {
   };
 
 //for get's ('/register') path
-  let registerFormControllerCallback = (request, response) => {
+  let registerForm = (request, response) => {
     response.render('flexswim/register');
     // response.send('wana register?');
   };
 
 //for post's ('register') path
-  let registerControllerCallback = (request, response) => {
+  let register = (request, response) => {
     //the username here is same with the queryResult in register's dbPoolInstance
     db.flexswim.register(request.body, (error, username) => {
         console.log(username);
@@ -53,12 +53,12 @@ module.exports = (db) => {
 };
 
 //for get's ('/login') path
-  let loginFormControllerCallback = (request, response) => {
+  let loginForm = (request, response) => {
     response.render('flexswim/login');
   };
 
 //for post's ('login') path
-  let loginControllerCallback = (request, response) => {
+  let login = (request, response) => {
     //the loginName here is same with the queryResult in login's dbPoolInstance
     db.flexswim.login(request.body, (error, loginName) => {
         console.log(loginName);
@@ -97,7 +97,7 @@ module.exports = (db) => {
 // ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
 
   //for get's ('/new') path
-  let newFormControllerCallback = (request, response) => {
+  let newForm = (request, response) => {
   // check to see if a user is logged in
     let user_id = request.cookies.userId;
     let username = request.cookies.username;
@@ -116,7 +116,7 @@ module.exports = (db) => {
   };
 
 //for app.post's('/new') path
-  let newControllerCallback = (request, response) => {
+  let postNewForm = (request, response) => {
       // use newWorkOut model method `create` to create new workout entry in db
       db.flexswim.newWorkOut(request.body, (error, queryResult) => {
         // (console log it to see for yourself)
@@ -144,9 +144,9 @@ module.exports = (db) => {
   };
 
 //for app.get's ('/show') path <<< TODO BECAUSE PATH FOR SHOW IS NOT WORKING YET
-    let showControllerCallback = (request, response) => {
+    let showAll = (request, response) => {
         let userId = request.cookies.userId;
-        db.flexswim.show(userId, (error, queryResult) => {
+        db.flexswim.showAll(userId, (error, queryResult) => {
         if (error) {
           console.error('error getting workout:', error);
           response.sendStatus(500);
@@ -168,11 +168,52 @@ module.exports = (db) => {
       });
   };
 
+  let showIndividualWorkOut = (request, response) => {
+      db.flexswim.selectIndividualWorkOut(request.params.id, request.cookies.userId, (error, queryResult) => {
+        if (error) {
+          console.error('error getting pokemon:', error);
+          response.sendStatus(500);
+        } else {
+            console.log(queryResult.rows[0]);
+            response.send({workout: queryResult.rows[0]});
+            //need to repair the individual workout page
+            // response.render('flexswim/individualworkout', {workout: queryResult.rows[0]});
+        }
+      });
+  };
+
+  // //SHOW ONE WORKOUT WITH ID
+  //     let showIndividualWorkOut = (request, response) => {
+  //       let workOutId = request.params.id;
+  //       db.flexswim.selectIndividualWorkOut(workOutId, (error, queryResult) => {
+  //       if (error) {
+  //         console.error('error getting workout:', error);
+  //         response.sendStatus(500);
+  //       }
+  //           if (queryResult.rowCount >= 1) {
+  //               console.log('able to show');
+  //               console.log(queryResult.rows);
+  //               let username = request.cookies.username;
+  //               let data = {
+  //               workOutId: workOutId,
+  //               username: username,
+  //               workout: queryResult.rows
+  //               };
+  //               response.send('can show individual workout!!!');
+  //               // response.render('flexswim/individualworkout', data);
+  //           } else {
+  //               console.log('not able to show');
+  //               response.redirect('/index');
+  //           }
+  //     });
+  // };
+
+
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
   //for get's ('/edit') path//TO DO AS IT IS QUITE MESSY FOR NOW
-    let editFormControllerCallback = (request, response) => {
+    let editForm = (request, response) => {
         let user_id = request.cookies.userId;
       db.flexswim.getAllPersonalStrokes(user_id,(error, queryResult) => {
         if (error) {
@@ -197,7 +238,7 @@ module.exports = (db) => {
   };
 
 //for app.post's('/edit') path
-  let editControllerCallback = (request, response) => {
+  let edit = (request, response) => {
       // use newWorkOut model method `create` to create new workout entry in db
       db.flexswim.newWorkOut(request.body, (error, queryResult) => {
         // (console log it to see for yourself)
@@ -229,7 +270,7 @@ module.exports = (db) => {
 // ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
 //for ('/logout') path
-  let logoutControllerCallback = (request, response) => {
+  let logout = (request, response) => {
     response.clearCookie("loggedIn");
     response.clearCookie("userId");
     response.clearCookie("username");
@@ -244,18 +285,19 @@ module.exports = (db) => {
    * ===========================================
    */
   return {
-    landing: landingControllerCallback,
-    index: indexControllerCallback,
-    registerForm: registerFormControllerCallback,
-    register: registerControllerCallback,
-    loginForm: loginFormControllerCallback,
-    login: loginControllerCallback,
-    newForm: newFormControllerCallback,
-    new: newControllerCallback,
-    show: showControllerCallback,
-    editForm: editFormControllerCallback,
-    edit: editControllerCallback,
-    logout: logoutControllerCallback
+    landing: landing,
+    index: index,
+    registerForm: registerForm,
+    register: register,
+    loginForm: loginForm,
+    login: login,
+    newForm: newForm,
+    new: postNewForm,
+    showAll: showAll,
+    showIndividualWorkOut:showIndividualWorkOut,
+    editForm: editForm,
+    edit: edit,
+    logout: logout
   };
 
 };

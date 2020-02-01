@@ -27,30 +27,32 @@ module.exports = (app, allModels) => {
 // ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
 // ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
 
-  app.get('/new', flexswimControllerCallbacks.newForm);
-  app.post('/new', flexswimControllerCallbacks.new);
+  app.get('/workout/new', flexswimControllerCallbacks.newForm);
+  app.post('/workout', flexswimControllerCallbacks.new);
 
 
 // ┌─┐┬ ┬┌─┐┬ ┬  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // └─┐├─┤│ ││││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘┴ ┴└─┘└┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
-  //SHOW WORKOUTS <<< THIS PATH IS NOT WORKING YET
-  app.get('/show', flexswimControllerCallbacks.show);
+  //SHOW ALL WORKOUTS
+  app.get('/show', flexswimControllerCallbacks.showAll);
 
+  //SHOW ONE WORKOUT WITH ID
+  app.get('/workout/:id', flexswimControllerCallbacks.showIndividualWorkOut);
 
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // ├┤  │││ │   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
-  // app.get('/edit', flexswimControllerCallbacks.editForm);
-  // app.put('/edit', flexswimControllerCallbacks.edit);
+  // app.get('/workout/:id/edit', flexswimControllerCallbacks.editForm);
+  // app.put('/workout/:id', flexswimControllerCallbacks.edit);
 
 
 // ┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 //  ││├┤ │  ├┤  │ ├┤   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
-  // app.delete("/:id", flexswimControllerCallbacks.delete);
+  // app.delete('/workout/:id', flexswimControllerCallbacks.delete);
 
   // app.get('/', flexswimControllerCallbacks.show);
   // app.get('/addfollower', flexswimControllerCallbacks.followerForm);
