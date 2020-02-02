@@ -1,4 +1,6 @@
 var React = require("react");
+var DefaultLayout = require('./layouts/default');
+
 const moment = require('moment');
 
   class Delete extends React.Component {

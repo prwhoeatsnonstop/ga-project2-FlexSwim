@@ -266,7 +266,7 @@ module.exports = (db) => {
 
 //LANDING PAGE FOR USER TO LOGIN/REGISTER
   let layout = (request, response) => {
-        response.render('flexswim/layout');
+        response.render('layouts/default');
   };
 
   /**
