@@ -12,7 +12,7 @@ module.exports = (db) => {
 
 //LANDING PAGE FOR USER TO LOGIN/REGISTER
   let landing = (request, response) => {
-        response.render('flexswim/landing');
+        response.render('flexswim/login');
   };
 
 //SHOWS ALL WORKOUTS FOR CURRENT USER OR NOWORKOUTYET PAGE (FOR NEW USER AND THOSE WHO HAVE YET TO CREATE WORKOUTS)

@@ -18,3 +18,8 @@ Provide an app that gives swimmers flexibility to choose from planned swimming w
 4. As a swimmer, I want to edit/delete my workout schedule so that it fits my current working schedule
 
 # Build a RESTful Interface using express
+
+# Resources
+
+# Layout for Login/Register
+- https://bootsnipp.com/snippets/dldxB

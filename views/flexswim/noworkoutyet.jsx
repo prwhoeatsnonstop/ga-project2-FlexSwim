@@ -1,5 +1,5 @@
 var React = require("react");
-
+var DefaultLayout = require('../layouts/default');
 class Index extends React.Component {
   render() {
 
@@ -12,6 +12,7 @@ class Index extends React.Component {
             Home - no work out yet
         </title>
         <body>
+        <DefaultLayout title={this.props.title}>
             <h3>Hello <span style={{ color: "#DB4067", fontWeight: "lighter"}}>{this.props.username}</span></h3>
             <p></p>
             <p></p>
@@ -38,6 +39,7 @@ class Index extends React.Component {
             <h3>Tired of working out? Logout from below</h3>
             <a className='btn btn-danger' href='/logout' role='button' >
                   Log Out</a>
+                  </DefaultLayout>
         </body>
       </html>
     );

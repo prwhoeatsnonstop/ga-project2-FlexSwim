@@ -1,4 +1,5 @@
 var React = require("react");
+var DefaultLayout = require('../layouts/layoutforlogin');
 
 class Logout extends React.Component {
   render() {
@@ -6,19 +7,31 @@ class Logout extends React.Component {
       <html>
         <head />
         <title>
-            Logout
+            FlexSwim
         </title>
-        <body>
-            <h3>You have successfully log out from this account.</h3>
-            <p></p>
-            <p></p>
-            <h3>To see your previous swim workouts again, login from here</h3>
-            <a href="/login">Login</a>
-            <p></p><p></p>
-            <h3>Considering a 2nd account? You can register a new one from here</h3>
-            <a href="/register">Register</a>
-            <p></p>
-        </body>
+            <DefaultLayout title={this.props.title}>
+            <h1>{this.props.title}</h1>
+<div className="wrapper fadeInDown">
+  <div id="formContent">
+    <div className="fadeIn first">
+        <h3>You've successfully logout!</h3>
+      <img src="img/seeyousoon.jpg" alt="User Icon" width="200" height="100"/>
+      <h3>But if you change your mind, you can always login from below 🏊</h3>
+    </div>
+
+    <form action="/login" method="POST">
+      <input type="text" id="login" className="fadeIn second" name="name" placeholder="login" required/>
+      <input type="text" id="password" className="fadeIn third" name="password" placeholder="password" required/>
+      <input type="submit" className="fadeIn fourth" value="Log In"/>
+    </form>
+
+    <div id="formFooter">
+      <a className="underlineHover" href="/register">Register For Additional New Account</a>
+    </div>
+
+  </div>
+</div>
+          </DefaultLayout>
       </html>
     );
   }

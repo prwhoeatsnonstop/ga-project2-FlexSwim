@@ -1,5 +1,6 @@
 var React = require("react");
 const moment = require('moment');
+var DefaultLayout = require('../layouts/default');
 class Index extends React.Component {
   render() {
     let info = this.props.show.map(show => {
@@ -25,6 +26,7 @@ class Index extends React.Component {
             Index Page
             </title>
         <body>
+        <DefaultLayout title={this.props.title}>
             <h3>Showing {this.props.username}'s personal workouts</h3>
             <p></p>
             <p></p>
@@ -55,6 +57,7 @@ class Index extends React.Component {
             <p></p>
             <h3>Tired of planning a workout? Logout from below</h3>
             <a href="/logout">Log out</a>
+            </DefaultLayout>
         </body>
       </html>
     );

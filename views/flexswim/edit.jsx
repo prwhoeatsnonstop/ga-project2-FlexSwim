@@ -1,5 +1,5 @@
 var React = require("react");
-
+var DefaultLayout = require('../layouts/default');
 class Edit  extends React.Component {
   render() {
           const url= '/workout/'+this.props.id+'?_method=PUT';

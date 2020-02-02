@@ -1,5 +1,6 @@
 var React = require("react");
 const moment = require('moment');
+var DefaultLayout = require('./layouts/default');
 class NewWorkout extends React.Component {
   render() {
     return (

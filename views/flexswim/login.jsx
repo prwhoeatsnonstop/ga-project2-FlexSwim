@@ -1,33 +1,35 @@
-var React = require('react');
-
-var sha256 = require('js-sha256');
-const SALT = "saltprotector";
+var React = require("react");
+var DefaultLayout = require('../layouts/layoutforlogin');
 
 class Login extends React.Component {
   render() {
     return (
       <html>
-      <head>
-          <title>Login page</title>
-      </head>
-        <body>
-          <div>
-            <h2>Login</h2>
-            <form action="/login" method="POST">
-                <p>
-                    Name <input name="name" placeholder="name" required/>
-                </p>
-                <p>
-                    Password <input type="password" name="password" placeholder="password"required/>
-                </p>
+        <head />
+        <title>
+            FlexSwim
+        </title>
+            <DefaultLayout title={this.props.title}>
+            <h1>{this.props.title}</h1>
+<div className="wrapper fadeInDown">
+  <div id="formContent">
+    <div className="fadeIn first">
+      <img src="img/user.png" id="icon" alt="User Icon"/>
+    </div>
 
-                <p>
-                    <input type="submit" value="Login"/>
-                </p>
-            </form>
+    <form action="/login" method="POST">
+      <input type="text" id="login" className="fadeIn second" name="name" placeholder="login" required/>
+      <input type="text" id="password" className="fadeIn third" name="password" placeholder="password" required/>
+      <input type="submit" className="fadeIn fourth" value="Log In"/>
+    </form>
 
-          </div>
-        </body>
+    <div id="formFooter">
+      <a className="underlineHover" href="/register">Register</a>
+    </div>
+
+  </div>
+</div>
+          </DefaultLayout>
       </html>
     );
   }
