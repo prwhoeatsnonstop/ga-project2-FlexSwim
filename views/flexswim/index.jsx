@@ -1,17 +1,18 @@
 var React = require("react");
 const moment = require('moment');
-class Show extends React.Component {
+class Index extends React.Component {
   render() {
     let info = this.props.show.map(show => {
 
         let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
-
+            const editUrl= '/workout/'+show.id+'/edit';
+            const deleteUrl= '/workout/'+show.id+'';
         return (<tr><td>{show.stroke_type}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
                 <td>{time}</td>
-                <td><a href="/workout/:id/edit">Edit</a></td>
-                <td><a href="/workout/:id">Delete</a></td>
+                <td><a href={editUrl}>Edit</a></td>
+                <td><a href={deleteUrl}>Delete</a></td>
                 </tr>
                 )
     })
@@ -36,7 +37,7 @@ class Show extends React.Component {
                         <th>Strokes</th>
                         <th>Distance</th>
                         <th>Duration</th>
-                        <th>Date created/Date updated</th>
+                        <th>Date created/updated</th>
                         <th>Edit</th>
                         <th>Delete</th>
                     </tr>
@@ -60,4 +61,4 @@ class Show extends React.Component {
   }
 }
 
-module.exports = Show;
+module.exports = Index;

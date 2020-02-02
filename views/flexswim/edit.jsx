@@ -23,6 +23,7 @@ class Edit  extends React.Component {
                 <p>
                 Stroke:
                 <select name="stroke" required>
+                    <option value={this.props.workout.stroke_type}>{this.props.workout.stroke_type}</option>
                     <option value="freestyle">Freestyle</option>
                     <option value="breastroke">Breastroke</option>
                     <option value="backstroke">Backstroke</option>

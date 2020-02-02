@@ -264,6 +264,10 @@ module.exports = (db) => {
     response.render('flexswim/logout');
 };
 
+//LANDING PAGE FOR USER TO LOGIN/REGISTER
+  let layout = (request, response) => {
+        response.render('flexswim/layout');
+  };
 
   /**
    * ===========================================
@@ -283,7 +287,8 @@ module.exports = (db) => {
     editForm: editForm,
     editPut: editPut,
     deleteWorkOut: deleteWorkOut,
-    logout: logout
+    logout: logout,
+    layout: layout
   };
 
 };

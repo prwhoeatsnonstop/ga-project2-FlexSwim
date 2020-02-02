@@ -117,7 +117,7 @@ module.exports = (dbPoolInstance) => {
 // └─┘─┴┘┴ ┴   ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
     let updateWorkOut = (workout, userId, callback) => {
         // UPDATE movies SET title='minion', description='cartoon'  WHERE id = 1;
-    let queryString = 'UPDATE personal_strokes SET stroke_type=$1, distance=$2, duration=$3, date_created=$4 WHERE id=$5 AND user_id=$6 RETURNING *';
+    let queryString = 'UPDATE personal_strokes SET stroke_type=$1, distance=$2, duration=$3, date_created=$4 WHERE id=$5 AND user_id=$6';
     let values = [workout.stroke, workout.distance, workout.duration, moment().format('LLLL'), workout.workoutId, userId];
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
@@ -143,6 +143,7 @@ module.exports = (dbPoolInstance) => {
             if (error) {
                 console.error('error');
             } else
+                queryResult.date_formatted = moment(queryResult.date_created).fromNow();
                 callback(null, queryResult);
     });
   }
