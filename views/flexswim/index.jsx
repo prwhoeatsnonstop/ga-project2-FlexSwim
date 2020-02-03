@@ -25,7 +25,7 @@ class Index extends React.Component {
                 <td><form method="POST" action={deleteUrl}>
                 <input type="submit" className="btn btn-danger" value="Delete "/>
                 </form></td>
-                <td>Uncomplete</td>
+                <td><span style={{color: 'black', fontWeight: 'bold'}}>Incomplete</span></td>
                 <td><form method="POST" action={doneUrl}>
                 <input type="submit" className="btn btn-primary" value="Done"/>
                 </form></td>
@@ -51,7 +51,7 @@ class Index extends React.Component {
                 <td>{show.duration}</td>
                 <td>{time}</td>
                 <td>{newtime}</td>
-                <td>Completed</td>
+                <td><span style={{color: '#006AD7', fontWeight: 'bold'}}>Completed</span></td>
                 </tr>
 
 
@@ -74,10 +74,12 @@ class Index extends React.Component {
       <a href="/workout/new" class="btn btn-primary btn-lg">Add more workout?</a>
     </header>
 
-    <div>
+    <div className="table" style={{textAlign: 'center'}}>
                 <table class="table table-hover table-bordered">
   <thead>
-  <tr>Uncompleted Workouts</tr>
+  <tr>
+  <td colspan="9"><span style={{color: '#CC2047', fontWeight: 'bold'}}>Incomplete Swim Workouts</span></td>
+  </tr>
     <tr>
       <th scope="col">Strokes</th>
       <th scope="col">Distance (metre)</th>
@@ -96,16 +98,19 @@ class Index extends React.Component {
 </table>
                 </div>
 
-                <div>
+    <div className="table" style={{textAlign: 'center'}}>
+
                 <table class="table table-hover table-bordered">
   <thead>
-  <tr>Completed Workouts</tr>
+    <tr>
+  <td colspan="9"><span style={{color: '#006AD7', fontWeight: 'bold'}}>Completed Swim Workouts</span></td>
+  </tr>
     <tr>
       <th scope="col">Strokes</th>
       <th scope="col">Distance (metre)</th>
       <th scope="col">Duration (minute)</th>
       <th scope="col">Date created</th>
-      <th scope="col">Date Completed</th>
+      <th scope="col">Date completed</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
