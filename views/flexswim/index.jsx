@@ -24,7 +24,7 @@ class Index extends React.Component {
                 <td><form method="POST" action={deleteUrl}>
                 <input type="submit" className="btn btn-danger" value="Delete "/>
                 </form></td>
-                <td><button type="button" class="btn btn-primary">Uncomplete</button></td>
+                <td>Uncomplete</td>
                 <td><form method="POST" action={doneUrl}>
                 <input type="submit" className="btn btn-primary" value="Done"/>
                 </form></td>
