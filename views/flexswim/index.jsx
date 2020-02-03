@@ -4,7 +4,11 @@ var DefaultLayout = require('../layouts/default');
 class Index extends React.Component {
   render() {
 
-    let info = this.props.show.map(show => {
+        let filteredfalse = this.props.show.filter(show => {
+            return show.done === false;
+        });
+
+        let info = filteredfalse.map(show => {
 
         let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
         let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
@@ -27,25 +31,25 @@ class Index extends React.Component {
                 </tr>)
     });
 
+
+// ┌─┐┬┬ ┌┬┐┌─┐┬─┐  ┌─┐┌─┐┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐┌┬┐  ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
+// ├┤ ││  │ ├┤ ├┬┘  │  │ ││││├─┘│  ├┤  │ ├┤  ││  ││││ │├┬┘├┴┐│ ││ │ │ └─┐
+// └  ┴┴─┘┴ └─┘┴└─  └─┘└─┘┴ ┴┴  ┴─┘└─┘ ┴ └─┘─┴┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
+
+
         let filteredtrue = this.props.show.filter(show => {
-        return show.done === true;
-});
+            return show.done === true;
+        });
 
-    let completed = filteredtrue.map(show => {
+        let completed = filteredtrue.map(show => {
 
-        let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
-        let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
-            const editUrl= '/workout/'+show.id+'/edit';
-            const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
+            let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
+            let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
         return (<tr><td>{show.stroke_type}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
                 <td>{time}</td>
                 <td>{newtime}</td>
-                <td><a href={editUrl} class="btn btn-info">Edit</a></td>
-                <td><form method="POST" action={deleteUrl}>
-                <input type="submit" className="btn btn-danger" value="Delete "/>
-                </form></td>
                 <td><button type="button" class="btn btn-primary">Completed</button></td>
                 </tr>
 
@@ -72,6 +76,7 @@ class Index extends React.Component {
     <div>
                 <table class="table table-hover table-bordered">
   <thead>
+  <tr>Uncompleted Workouts</tr>
     <tr>
       <th scope="col">Strokes</th>
       <th scope="col">Distance (metre)</th>
@@ -100,8 +105,6 @@ class Index extends React.Component {
       <th scope="col">Duration (minute)</th>
       <th scope="col">Date created</th>
       <th scope="col">Date updated</th>
-      <th scope="col">Edit</th>
-      <th scope="col">Delete</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
