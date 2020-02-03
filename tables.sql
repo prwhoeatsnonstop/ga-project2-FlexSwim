@@ -17,7 +17,8 @@ CREATE TABLE IF NOT EXISTS personal_strokes (
 	user_id INTEGER,
 	done BOOLEAN,
 	date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-	date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+	date_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	date_completed TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ┌─┐┌─┐┬  ┬┌─┐┬─┐┬┌┬┐┌─┐  ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐

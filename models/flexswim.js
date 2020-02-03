@@ -73,8 +73,8 @@ module.exports = (dbPoolInstance) => {
 // ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
 // ┴ ┴─┴┘─┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴
     let newWorkOut = (workout, callback) => {
-    let queryString = 'INSERT INTO personal_strokes (stroke_type, distance, duration, user_id, done, date_created, date_updated) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *';
-    let values = [workout.stroke, workout.distance, workout.duration, workout.userId, false, moment().format('LLLL'), moment().format('LLLL')];
+    let queryString = 'INSERT INTO personal_strokes (stroke_type, distance, duration, user_id, done, date_created, date_updated, date_completed) VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *';
+    let values = [workout.stroke, workout.distance, workout.duration, workout.userId, false, moment().format('LLLL'), moment().format('LLLL'), moment().format('LLLL')];
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
@@ -152,9 +152,9 @@ module.exports = (dbPoolInstance) => {
   //FOR DONE PATH
   let doneWorkOut = (workout, userId, callback) => {
         // UPDATE movies SET title='minion', description='cartoon'  WHERE id = 1;
-    let queryString = 'UPDATE personal_strokes SET done = true WHERE id=$1 AND user_id=$2';
+    let queryString = 'UPDATE personal_strokes SET done = true, date_completed = $3 WHERE id=$1 AND user_id=$2';
     console.log(workout.workoutId, userId);
-    let values = [workout, userId];
+    let values = [workout, userId, moment().format('LLLL')];
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
@@ -164,6 +164,7 @@ module.exports = (dbPoolInstance) => {
                 callback(null, queryResult);
     });
   };
+
 
   return {
     getAllUsers: getAllUsers,

@@ -320,7 +320,6 @@ module.exports = (db) => {
   };
 
 
-
 //for ('/logout') path
   let logout = (request, response) => {
     response.clearCookie("loggedIn");

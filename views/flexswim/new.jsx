@@ -15,7 +15,7 @@ class New extends React.Component {
       <p class="lead">You may add new workout in the below form.</p>
     </header>
             <form class="form-horizontal" role="form" method="POST" action="/workout">
-                <h2> Form </h2>
+                <h2> Add </h2>
                      <input type="text" name="userId" hidden value={this.props.user_id}/>
                 <div class="form-group">
                     <label for="country" class="col-sm-3 control-label">Stroke Type</label>
@@ -42,7 +42,7 @@ class New extends React.Component {
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
-                        <button type="submit" class="btn btn-primary btn-block">Add</button>
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
                     </div>
                 </div>
             </form>

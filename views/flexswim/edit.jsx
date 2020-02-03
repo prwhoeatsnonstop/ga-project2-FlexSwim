@@ -18,7 +18,7 @@ class Edit  extends React.Component {
       <p class="lead">You may add edit workout in the below form.</p>
     </header>
             <form className="form-horizontal" role="form" method="POST" action={url}>
-                <h2> Form</h2>
+                <h2> Edit </h2>
                     <input type="text" name="userId" hidden value={this.props.workout.user_id}/>
                     <input type="text" name="workoutId" hidden value={this.props.workout.id}/>
                 <div class="form-group">
@@ -47,7 +47,7 @@ class Edit  extends React.Component {
                 </div>
                 <div class="form-group">
                     <div class="col-sm-9 col-sm-offset-3">
-                        <button type="submit" class="btn btn-primary btn-block">Edit</button>
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
                     </div>
                 </div>
             </form>

@@ -45,7 +45,7 @@ class Index extends React.Component {
         let completed = filteredtrue.map(show => {
 
             let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
-            let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
+            let newtime = moment(show.date_completed).format('MMMM Do YYYY, h:mm:ss a');
         return (<tr><td>{Capitalize(show.stroke_type)}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
@@ -105,7 +105,7 @@ class Index extends React.Component {
       <th scope="col">Distance (metre)</th>
       <th scope="col">Duration (minute)</th>
       <th scope="col">Date created</th>
-      <th scope="col">Date updated</th>
+      <th scope="col">Date Completed</th>
       <th scope="col">Status</th>
     </tr>
   </thead>
