@@ -53,9 +53,6 @@ module.exports = (app, allModels) => {
 
   // app.get('/about/', flexswimControllerCallbacks.about);
 
-  // app.get('/', flexswimControllerCallbacks.show);
   // app.get('/addfollower', flexswimControllerCallbacks.followerForm);
   // app.post('/addfollower', flexswimControllerCallbacks.follower);
-
-  // app.get('/show', flexswimControllerCallbacks.show);
 };

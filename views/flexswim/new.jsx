@@ -9,7 +9,7 @@ class New extends React.Component {
         <body>
         <DefaultLayout title={this.props.title}>
 
-        <div class="container">
+        <div class="container" align="center">
             <header class="jumbotron my-4">
       <h1 class="display-3">Hi {this.props.username}!</h1>
       <p class="lead">You may add new workout in the below form.</p>
