@@ -34,7 +34,7 @@ module.exports = (app, allModels) => {
 // ┌─┐┬ ┬┌─┐┬ ┬  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 // └─┐├─┤│ ││││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // └─┘┴ ┴└─┘└┴┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
-  //SHOW ONE WORKOUT WITH ID
+  //SHOW ONE WORKOUT WITH ID (THIS DOES NOT WORK, IT WAS FOR DELETE PURPOSE ORIGINALLY)
   app.get('/workout/:id', flexswimControllerCallbacks.showIndividualWorkOut);
 
 // ┌─┐┌┬┐┬┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
@@ -52,6 +52,9 @@ module.exports = (app, allModels) => {
   app.delete('/workout/:id', flexswimControllerCallbacks.deleteWorkOut);
 
   // app.get('/about/', flexswimControllerCallbacks.about);
+  //PATH FOR MARK AS DONE
+  app.put('/workout/:id/done', flexswimControllerCallbacks.doneWorkOut);
+
 
   // app.get('/addfollower', flexswimControllerCallbacks.followerForm);
   // app.post('/addfollower', flexswimControllerCallbacks.follower);

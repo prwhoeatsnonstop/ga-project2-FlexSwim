@@ -149,6 +149,22 @@ module.exports = (dbPoolInstance) => {
     });
   }
 
+  //FOR DONE PATH
+  let doneWorkOut = (workout, userId, callback) => {
+        // UPDATE movies SET title='minion', description='cartoon'  WHERE id = 1;
+    let queryString = 'UPDATE personal_strokes SET done = true WHERE id=$1 AND user_id=$2';
+    console.log(workout.workoutId, userId);
+    let values = [workout, userId];
+    // execute query
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+            if (error) {
+                console.error('error');
+            } else
+                queryResult.date_formatted = moment(queryResult.date_created).fromNow();
+                callback(null, queryResult);
+    });
+  };
+
   return {
     getAllUsers: getAllUsers,
     register: register,
@@ -157,6 +173,7 @@ module.exports = (dbPoolInstance) => {
     showAll: showAll,
     selectIndividualWorkOut: selectIndividualWorkOut,
     updateWorkOut: updateWorkOut,
-    deleteWorkOut: deleteWorkOut
+    deleteWorkOut: deleteWorkOut,
+    doneWorkOut: doneWorkOut
   };
 };

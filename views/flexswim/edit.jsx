@@ -15,7 +15,7 @@ class Edit  extends React.Component {
       <h1 class="display-3">Hi {this.props.username}!</h1>
       <p class="lead">You may add edit workout in the below form.</p>
     </header>
-            <form class="form-horizontal" role="form" method="POST" action={url}>
+            <form className="form-horizontal" role="form" method="POST" action={url}>
                 <h2> Form</h2>
                     <input type="text" name="userId" hidden value={this.props.workout.user_id}/>
                     <input type="text" name="workoutId" hidden value={this.props.workout.id}/>

@@ -292,6 +292,35 @@ module.exports = (db) => {
     }
   };
 
+
+//FOR DONE PATH
+  let doneWorkOut = (request, response) => {
+  // check to see if a user is logged in
+    let user_id = request.cookies.userId;
+    let username = request.cookies.username;
+    let hashedCookie = sha256(user_id + SALT);
+    let data = {
+        user_id: user_id,
+        username: username
+    }
+    if (request.cookies.loggedIn === hashedCookie){
+        db.flexswim.doneWorkOut(request.params.id, user_id, (error, queryResult) => {
+            if (error) {
+                console.error('error getting workout:', error);
+                response.sendStatus(500);
+            } else {
+                console.log('Workout done!');
+                console.log(queryResult.rows[0]);
+                response.redirect('/');
+            }
+        });
+    } else {
+        response.send('wrong user!');
+    }
+  };
+
+
+
 //for ('/logout') path
   let logout = (request, response) => {
     response.clearCookie("loggedIn");
@@ -301,10 +330,6 @@ module.exports = (db) => {
     response.render('flexswim/logout');
 };
 
-//LANDING PAGE FOR USER TO LOGIN/REGISTER
-  let layout = (request, response) => {
-        response.render('layouts/default');
-  };
 
   /**
    * ===========================================
@@ -325,7 +350,7 @@ module.exports = (db) => {
     editPut: editPut,
     deleteWorkOut: deleteWorkOut,
     logout: logout,
-    layout: layout
+    doneWorkOut: doneWorkOut
   };
 
 };

@@ -10,7 +10,8 @@ class Index extends React.Component {
         let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
             const editUrl= '/workout/'+show.id+'/edit';
             const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
-            const addUrl = 'workout/new';
+            const doneUrl= '/workout/'+show.id+'/done?_method=PUT';
+            // const addUrl = 'workout/new';
         return (<tr><td>{show.stroke_type}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
@@ -18,14 +19,12 @@ class Index extends React.Component {
                 <td>{newtime}</td>
                 <td><a href={editUrl} class="btn btn-info">Edit</a></td>
                 <td><form method="POST" action={deleteUrl}>
-                <input type="hidden" name="workoutID" value={this.props.show.id}/>
-                <input type="hidden" name="strokeID" value={this.props.show.stroke_type}/>
-                <input type="hidden" name="distanceID" value={this.props.show.distance}/>
-                <input type="hidden" name="durationID" value={this.props.show.duration}/>
-
-                <input type="submit" className="btn btn-danger" value="Delete this workout"/>
-            </form></td>
-                <td><a href='/workout/new' class="btn btn-primary">Add</a></td>
+                <input type="submit" className="btn btn-danger" value="Delete "/>
+                </form></td>
+                <td><button type="button" class="btn btn-primary">Uncomplete</button></td>
+                <td><form method="POST" action={doneUrl}>
+                <input type="submit" className="btn btn-primary" value="Done"/>
+                </form></td>
                 </tr>
                 )
     })
@@ -37,7 +36,7 @@ class Index extends React.Component {
             </title>
         <body>
         <DefaultLayout title={this.props.title}>
-  <div class="container">
+  <div class="container" align="center">
 
     <header class="jumbotron my-4">
       <h1 class="display-3">Hi {this.props.username}!</h1>
@@ -50,14 +49,14 @@ class Index extends React.Component {
   <thead>
     <tr>
       <th scope="col">Strokes</th>
-      <th scope="col">Distance (in metres)</th>
-      <th scope="col">Duration (in minutes)</th>
+      <th scope="col">Distance (metre)</th>
+      <th scope="col">Duration (minute)</th>
       <th scope="col">Date created</th>
       <th scope="col">Date updated</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
-      <th scope="col">Add more</th>
-
+      <th scope="col">Status</th>
+      <th scope="col">Mark as done</th>
     </tr>
   </thead>
   <tbody>
