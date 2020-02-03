@@ -3,7 +3,8 @@ const moment = require('moment');
 var DefaultLayout = require('../layouts/default');
 class Index extends React.Component {
   render() {
-
+        let Capitalize = (str) => {
+            return str.charAt(0).toUpperCase() + str.slice(1) };
         let filteredfalse = this.props.show.filter(show => {
             return show.done === false;
         });
@@ -15,7 +16,7 @@ class Index extends React.Component {
             const editUrl= '/workout/'+show.id+'/edit';
             const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
             const doneUrl= '/workout/'+show.id+'/done?_method=PUT';
-        return (<tr><td>{show.stroke_type}</td>
+        return (<tr><td>{Capitalize(show.stroke_type)}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
                 <td>{time}</td>
@@ -45,12 +46,12 @@ class Index extends React.Component {
 
             let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
             let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
-        return (<tr><td>{show.stroke_type}</td>
+        return (<tr><td>{Capitalize(show.stroke_type)}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
                 <td>{time}</td>
                 <td>{newtime}</td>
-                <td><button type="button" class="btn btn-primary">Completed</button></td>
+                <td>Completed</td>
                 </tr>
 
 

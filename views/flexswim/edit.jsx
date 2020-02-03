@@ -2,6 +2,8 @@ var React = require("react");
 var DefaultLayout = require('../layouts/formlayout');
 class Edit  extends React.Component {
   render() {
+        let Capitalize = (str) => {
+            return str.charAt(0).toUpperCase() + str.slice(1) };
           const url= '/workout/'+this.props.id+'?_method=PUT';
     return (
       <html>
@@ -23,7 +25,7 @@ class Edit  extends React.Component {
                     <label for="country" class="col-sm-3 control-label">Stroke Type</label>
                     <div class="col-sm-9">
                         <select name="stroke" id="country" class="form-control">
-                            <option value={this.props.workout.stroke_type}>{this.props.workout.stroke_type}</option>
+                            <option value={this.props.workout.stroke_type}>{Capitalize(this.props.workout.stroke_type)}</option>
                             <option value="freestyle">Freestyle</option>
                             <option value="breastroke">Breastroke</option>
                             <option value="backstroke">Backstroke</option>
