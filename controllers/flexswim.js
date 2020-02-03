@@ -145,7 +145,7 @@ module.exports = (db) => {
                 name: request.cookies.username,
                 workout: queryResult.rows[0]
                 }
-                response.render('flexswim/newworkout', data);
+                response.redirect('/');
             } else {
                 console.log('workout could not be created');
                 response.render('flexswim/new');

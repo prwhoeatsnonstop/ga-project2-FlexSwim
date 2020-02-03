@@ -7,7 +7,7 @@ class Index extends React.Component {
     let info = this.props.show.map(show => {
 
         let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
-        let newtime = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
+        let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
             const editUrl= '/workout/'+show.id+'/edit';
             const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
             const addUrl = 'workout/new';
