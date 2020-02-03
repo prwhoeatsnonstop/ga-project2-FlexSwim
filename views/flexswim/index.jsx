@@ -11,7 +11,6 @@ class Index extends React.Component {
             const editUrl= '/workout/'+show.id+'/edit';
             const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
             const doneUrl= '/workout/'+show.id+'/done?_method=PUT';
-            // const addUrl = 'workout/new';
         return (<tr><td>{show.stroke_type}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
@@ -25,9 +24,35 @@ class Index extends React.Component {
                 <td><form method="POST" action={doneUrl}>
                 <input type="submit" className="btn btn-primary" value="Done"/>
                 </form></td>
+                </tr>)
+    });
+
+        let filteredtrue = this.props.show.filter(show => {
+        return show.done === true;
+});
+
+    let completed = filteredtrue.map(show => {
+
+        let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
+        let newtime = moment(show.date_updated).format('MMMM Do YYYY, h:mm:ss a');
+            const editUrl= '/workout/'+show.id+'/edit';
+            const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
+        return (<tr><td>{show.stroke_type}</td>
+                <td>{show.distance}</td>
+                <td>{show.duration}</td>
+                <td>{time}</td>
+                <td>{newtime}</td>
+                <td><a href={editUrl} class="btn btn-info">Edit</a></td>
+                <td><form method="POST" action={deleteUrl}>
+                <input type="submit" className="btn btn-danger" value="Delete "/>
+                </form></td>
+                <td><button type="button" class="btn btn-primary">Completed</button></td>
                 </tr>
+
+
+
                 )
-    })
+    });
     return (
       <html>
         <head />
@@ -65,6 +90,26 @@ class Index extends React.Component {
 </table>
                 </div>
 
+                <div>
+                <table class="table table-hover table-bordered">
+  <thead>
+  <tr>Completed Workouts</tr>
+    <tr>
+      <th scope="col">Strokes</th>
+      <th scope="col">Distance (metre)</th>
+      <th scope="col">Duration (minute)</th>
+      <th scope="col">Date created</th>
+      <th scope="col">Date updated</th>
+      <th scope="col">Edit</th>
+      <th scope="col">Delete</th>
+      <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  {completed}
+  </tbody>
+</table>
+                </div>
     <div class="row text-center">
 
       <div class="col-lg-3 col-md-6 mb-4">

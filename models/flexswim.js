@@ -89,7 +89,7 @@ module.exports = (dbPoolInstance) => {
   let showAll = (user, callback) => {
     let values = [user];
     //FOR NOW SELECT ALL IS ALPHABETICALLY BY STROKE TYPE, IN FUTURE CAN EDIT
-    let queryString = 'SELECT * FROM personal_strokes WHERE user_id=$1 ORDER BY stroke_type';
+    let queryString = 'SELECT * FROM personal_strokes WHERE user_id=$1 ORDER BY personal_strokes ';
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
                 console.error('error');
