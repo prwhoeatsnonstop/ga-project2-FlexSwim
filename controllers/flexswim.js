@@ -135,7 +135,7 @@ module.exports = (db) => {
                             response.cookie('username', request.body.name);
                             response.cookie('loggedIn', hashedUser);
                             response.cookie('userId', user_id);
-                            response.redirect('/');
+                            response.redirect('/home');
                         } else {
                         response.send('Incorrect Password!');
                         }
@@ -319,6 +319,12 @@ module.exports = (db) => {
     }
   };
 
+//FOR HOME PATH
+  let home = (request, response) => {
+        let name = request.cookies.username;
+        response.render('flexswim/home', {name: name});
+  };
+
 
 //for ('/logout') path
   let logout = (request, response) => {
@@ -349,7 +355,8 @@ module.exports = (db) => {
     editPut: editPut,
     deleteWorkOut: deleteWorkOut,
     logout: logout,
-    doneWorkOut: doneWorkOut
+    doneWorkOut: doneWorkOut,
+    home: home
   };
 
 };

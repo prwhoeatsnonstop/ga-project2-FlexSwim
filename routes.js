@@ -17,10 +17,19 @@ module.exports = (app, allModels) => {
 
   app.get('/landing', flexswimControllerCallbacks.landing);
   app.get('/', flexswimControllerCallbacks.index);
+
+//HOME PAGE OF USER
+  app.get('/home', flexswimControllerCallbacks.home);
+
+//REGISTER
   app.get('/register', flexswimControllerCallbacks.registerForm);
   app.post('/register', flexswimControllerCallbacks.register);
+
+//LOGIN
   app.get('/login', flexswimControllerCallbacks.loginForm);
   app.post('/login', flexswimControllerCallbacks.login);
+
+//LOGOUT
   app.get('/logout', flexswimControllerCallbacks.logout);
 
 // ┌─┐┌┬┐┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐
