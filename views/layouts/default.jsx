@@ -16,7 +16,7 @@ class Layout extends React.Component {
         </head>
     <body>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="/books/"><img src="/img/swim.jpg" width="40" height="50" className="d-inline-block align-center" alt="" />FlexSwim</a>
+      <a className="navbar-brand" href="#"><img src="/img/swim.jpg" width="40" height="50" className="d-inline-block align-center" alt="" />FlexSwim</a>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -29,17 +29,14 @@ class Layout extends React.Component {
                 <a className="nav-link" href="/">Show All Workouts</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/books/:id/edit">About</a>
-              </li>
-              <li className="nav-item">
-                <a className="nav-link" href="/books/:id/edit">Contact</a>
+                <a className="nav-link" href="#">About FlexSwim</a>
               </li>
         </ul>
             <span className="navbar-text">
-             TODO
+
             </span>
             <span className="nav-item">
-                <a className="nav-link" href="/books/login">TODO</a>
+                <a className="nav-link" href="#"></a>
             </span>
               <span className="nav-item">
                 <a className="nav-link" href="/logout">Logout</a>
@@ -48,6 +45,10 @@ class Layout extends React.Component {
     </nav>
             {this.props.children}
         </body>
+        <footer class="page-footer font-small blue">
+            <div class="footer-copyright text-center py-3">© 2020 Copyright: Made by Eunice
+            </div>
+        </footer>
       </html>
     );
   }

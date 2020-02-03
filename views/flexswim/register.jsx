@@ -18,14 +18,11 @@ class Landing extends React.Component {
     </div>
 
     <form action="/login" method="POST">
-      <input type="text" id="login" className="fadeIn second" name="name" placeholder="login" required/>
+      <input type="text" id="login" className="fadeIn second" name="name" placeholder="username" required/>
       <input type="text" id="password" className="fadeIn third" name="password" placeholder="password" required/>
-      <input type="submit" className="fadeIn fourth" value="Log In"/>
+      <input type="submit" className="fadeIn fourth" value="Register"/>
     </form>
 
-    <div id="formFooter">
-      <a className="underlineHover" href="/register">Register</a>
-    </div>
 
   </div>
 </div>

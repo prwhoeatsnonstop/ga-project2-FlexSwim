@@ -23,3 +23,6 @@ Provide an app that gives swimmers flexibility to choose from planned swimming w
 
 # Layout for Login/Register
 - https://bootsnipp.com/snippets/dldxB
+- https://mdbootstrap.com/docs/jquery/navigation/footer/
+- https://startbootstrap.com/previews/heroic-features/
+- https://codepen.io/juff03/pen/OXaXRG?__cf_chl_jschl_tk__=db268b6300b2d52052f37e9913c5c5110da6ba79-1580691066-0-AZUonHPuyTZwLH6e3eZ_-UphxPY24J6Q1ex0WwdscvmikZcSFr-I4Y3c29mPHX72NEmK9TLMN-Um4RhnHGbjb9x3HKTlTipVLFQiP499MZrgoTPsBC1eGpjnMGgf_FSTYgcZcaSha6UXYn4zXyh51rp-tISyjojJeWPEsWRG2t317LOGj4_sgFCcBE06sYvBq-UC5n7zHXggs6_LLBvf9PN9VVS2ZVmrKekAiVMi-1zNjB9vV4OHdeHb7ZVuI4bGWh_Dv1zNxN93uCqvCJJ8lEw3XVdyDh83QlEcLLfo_vHlrzSRmRGiBOXClYFAE2sVt7OBjBN238KC0KPgPEDK1vg

@@ -1,6 +1,6 @@
 var React = require("react");
 const moment = require('moment');
-var DefaultLayout = require('./layouts/default');
+var DefaultLayout = require('../layouts/default');
 class NewWorkout extends React.Component {
   render() {
     return (
@@ -12,6 +12,7 @@ class NewWorkout extends React.Component {
             Added New WorkOut Page
             </title>
         <body>
+        <DefaultLayout title={this.props.title}>
             <h3>Hi {this.props.name}, below are your newly added personal workouts
             </h3>
                 <div>
@@ -25,18 +26,6 @@ class NewWorkout extends React.Component {
             <p></p>
             <p></p>
             <p></p>
-            <h3>Wana edit a personal swimming workout? Click the below link</h3>
-                <a className='btn btn-danger' href='/workout/:id/edit' role='button' >
-                Edit a swimming workout</a>
-            <p></p>
-            <p></p>
-            <p></p>
-            <h3>Wana delete this personal swimming workout? Click the below link</h3>
-                <a className='btn btn-danger' href='/workout/:id' role='button' >
-                Delete a workout</a>
-            <p></p>
-            <p></p>
-            <p></p>
             <h3>Return to home to view all workouts</h3>
                 <a href='/'>Home</a>
             <p></p>
@@ -44,6 +33,7 @@ class NewWorkout extends React.Component {
             <p></p>
             <h3>Tired of planning a workout? Logout from below</h3>
             <a href="/logout">Log out</a>
+            </DefaultLayout>
         </body>
       </html>
     );

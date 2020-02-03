@@ -51,7 +51,7 @@ module.exports = (app, allModels) => {
 
   app.delete('/workout/:id', flexswimControllerCallbacks.deleteWorkOut);
 
-  app.get('/layout/', flexswimControllerCallbacks.layout);
+  // app.get('/about/', flexswimControllerCallbacks.about);
 
   // app.get('/', flexswimControllerCallbacks.show);
   // app.get('/addfollower', flexswimControllerCallbacks.followerForm);

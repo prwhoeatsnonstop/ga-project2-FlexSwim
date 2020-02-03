@@ -1,5 +1,5 @@
 var React = require("react");
-var DefaultLayout = require('./layouts/default');
+var DefaultLayout = require('../layouts/default');
 class New extends React.Component {
   render() {
     return (
@@ -7,6 +7,8 @@ class New extends React.Component {
         <head/>
             <title>Create a new workout!</title>
         <body>
+        <DefaultLayout title={this.props.title}>
+
             <h1>Hi {this.props.username}, wana add a new Swim Work Out? Do it here!</h1>
             <form method="POST" action="/workout">
                 <p>
@@ -29,6 +31,8 @@ class New extends React.Component {
                 </p>
                 <input type="submit" value="Submit"/>
             </form>
+
+                      </DefaultLayout>
         </body>
       </html>
     );

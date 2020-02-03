@@ -31,3 +31,15 @@ class Register extends React.Component {
 }
 
 module.exports = Register;
+
+                <table>
+                    <tr>
+                        <th>Strokes</th>
+                        <th>Distance</th>
+                        <th>Duration</th>
+                        <th>Date created/updated</th>
+                        <th>Edit</th>
+                        <th>Delete</th>
+                    </tr>
+                    {info}
+                </table>

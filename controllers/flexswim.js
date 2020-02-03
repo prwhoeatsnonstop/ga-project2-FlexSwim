@@ -172,7 +172,7 @@ module.exports = (db) => {
                     workout: queryResult.rows[0],
                     name: username
                 }
-                response.render('flexswim/individualworkout', data);
+                response.render('flexswim/delete', data);
             };
         });
     } else {

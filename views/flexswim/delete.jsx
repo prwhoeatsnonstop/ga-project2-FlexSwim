@@ -12,7 +12,8 @@ const moment = require('moment');
             Individual Workout
         </title>
         <body>
-            <h4><a href='/' className="text-body">{this.props.name}</a>, </h4>
+        <DefaultLayout title={this.props.title}>
+            <h4><a href='/' className="text-body">Hi {this.props.name}</a>, </h4>
             <p>this was your previous chosen stroke, {this.props.workout.stroke_type}</p>
             <form method="POST" action={deleteUrl}>
                 <input type="hidden" name="workoutID" value={this.props.workout.id}/>
@@ -24,6 +25,7 @@ const moment = require('moment');
             </form>
             <h3>Return to home if dun wana delete</h3>
                 <a href='/'>Home</a>
+                </DefaultLayout>
         </body>
         </html>
                 )
