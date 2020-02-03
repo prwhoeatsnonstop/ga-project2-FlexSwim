@@ -13,7 +13,7 @@ class New extends React.Component {
         <h1>Hi {this.props.username}, wana add a new Swim Work Out?</h1>
             <form class="form-horizontal" role="form" method="POST" action="/workout">
                 <h2> Swim Work Out Form</h2>
-
+                     <input type="text" name="userId" hidden value={this.props.user_id}/>
                 <div class="form-group">
                     <label for="country" class="col-sm-3 control-label">Stroke Type</label>
                     <div class="col-sm-9">

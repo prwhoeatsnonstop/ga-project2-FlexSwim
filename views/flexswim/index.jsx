@@ -7,6 +7,7 @@ class Index extends React.Component {
     let info = this.props.show.map(show => {
 
         let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
+        let newtime = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
             const editUrl= '/workout/'+show.id+'/edit';
             const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
             const addUrl = 'workout/new';
@@ -14,6 +15,7 @@ class Index extends React.Component {
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
                 <td>{time}</td>
+                <td>{newtime}</td>
                 <td><a href={editUrl} class="btn btn-info">Edit</a></td>
                 <td><form method="POST" action={deleteUrl}>
                 <input type="hidden" name="workoutID" value={this.props.show.id}/>
@@ -50,7 +52,8 @@ class Index extends React.Component {
       <th scope="col">Strokes</th>
       <th scope="col">Distance (in metres)</th>
       <th scope="col">Duration (in minutes)</th>
-      <th scope="col">Date created/updated</th>
+      <th scope="col">Date created</th>
+      <th scope="col">Date updated</th>
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
       <th scope="col">Add more</th>
