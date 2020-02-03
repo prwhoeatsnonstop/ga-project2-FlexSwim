@@ -16,9 +16,43 @@ module.exports = (db) => {
   };
 
 //SHOWS ALL WORKOUTS FOR CURRENT USER OR NOWORKOUTYET PAGE (FOR NEW USER AND THOSE WHO HAVE YET TO CREATE WORKOUTS)
-  let index = (request, response) => {
-        let userId = request.cookies.userId;
-        db.flexswim.showAll(userId, (error, queryResult) => {
+  // let index = (request, response) => {
+  //       let userId = request.cookies.userId;
+  //       db.flexswim.showAll(userId, (error, queryResult) => {
+  //       if (error) {
+  //         console.error('error getting workout:', error);
+  //         response.sendStatus(500);
+  //       }
+  //           if (queryResult.rowCount >= 1) {
+  //               console.log('able to show');
+  //               console.log(queryResult.rows);
+  //               let username = request.cookies.username;
+  //               let data = {
+  //               userId: userId,
+  //               username: username,
+  //               show: queryResult.rows
+  //               };
+  //               response.render('flexswim/index', data);
+  //           } else {
+  //               console.log('not able to show');
+  //               //DECIDE WHAT TO RENDER IF GOT ERROR GOING TO INDEX PAGE
+  //               response.render('flexswim/noworkoutyet', {username: request.cookies.username});
+  //           }
+  //     });
+  // };
+
+    let index = (request, response) => {
+  // check to see if a user is logged in
+    let user_id = request.cookies.userId;
+    let username = request.cookies.username;
+    let hashedCookie = sha256(user_id + SALT);
+    let data = {
+        user_id: user_id,
+        username: username
+    }
+    if (request.cookies.loggedIn === hashedCookie){
+
+        db.flexswim.showAll(user_id, (error, queryResult) => {
         if (error) {
           console.error('error getting workout:', error);
           response.sendStatus(500);
@@ -28,7 +62,7 @@ module.exports = (db) => {
                 console.log(queryResult.rows);
                 let username = request.cookies.username;
                 let data = {
-                userId: userId,
+                userId: user_id,
                 username: username,
                 show: queryResult.rows
                 };
@@ -39,6 +73,9 @@ module.exports = (db) => {
                 response.render('flexswim/noworkoutyet', {username: request.cookies.username});
             }
       });
+    } else {
+        response.send('wrong user!');
+    }
   };
 
 //FOR GET'S ('/REGISTER') PATH
