@@ -1,5 +1,5 @@
 var React = require("react");
-var DefaultLayout = require('../layouts/default');
+var DefaultLayout = require('../layouts/formlayout');
 class New extends React.Component {
   render() {
     return (
@@ -10,9 +10,12 @@ class New extends React.Component {
         <DefaultLayout title={this.props.title}>
 
         <div class="container">
-        <h1>Hi {this.props.username}, wana add a new Swim Work Out?</h1>
+            <header class="jumbotron my-4">
+      <h1 class="display-3">Hi {this.props.username}!</h1>
+      <p class="lead">You may add new workout in the below form.</p>
+    </header>
             <form class="form-horizontal" role="form" method="POST" action="/workout">
-                <h2> Swim Work Out Form</h2>
+                <h2> Form </h2>
                      <input type="text" name="userId" hidden value={this.props.user_id}/>
                 <div class="form-group">
                     <label for="country" class="col-sm-3 control-label">Stroke Type</label>
