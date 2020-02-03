@@ -4,7 +4,7 @@ const moment = require('moment');
 
   class Delete extends React.Component {
     render() {
-      const deleteUrl= '/workout/'+this.props.workout.id+'/delete?_method=DELETE';
+      const deleteUrl= '/workout/'+this.props.workout.id+'?_method=DELETE';
     return (
         <html>
         <head />

@@ -3,19 +3,27 @@ const moment = require('moment');
 var DefaultLayout = require('../layouts/default');
 class Index extends React.Component {
   render() {
+
     let info = this.props.show.map(show => {
 
         let time = moment(show.date_created).format('MMMM Do YYYY, h:mm:ss a');
             const editUrl= '/workout/'+show.id+'/edit';
-            const deleteUrl= '/workout/'+show.id+'';
+            const deleteUrl= '/workout/'+show.id+'?_method=DELETE';
             const addUrl = 'workout/new';
         return (<tr><td>{show.stroke_type}</td>
                 <td>{show.distance}</td>
                 <td>{show.duration}</td>
                 <td>{time}</td>
-                <td><a href={editUrl}>Edit</a></td>
-                <td><a href={deleteUrl}>Delete</a></td>
-                <td><a href={addUrl}>Add More Workouts</a></td>
+                <td><a href={editUrl} class="btn btn-info">Edit</a></td>
+                <td><form method="POST" action={deleteUrl}>
+                <input type="hidden" name="workoutID" value={this.props.show.id}/>
+                <input type="hidden" name="strokeID" value={this.props.show.stroke_type}/>
+                <input type="hidden" name="distanceID" value={this.props.show.distance}/>
+                <input type="hidden" name="durationID" value={this.props.show.duration}/>
+
+                <input type="submit" className="btn btn-danger" value="Delete this workout"/>
+            </form></td>
+                <td><a href='/workout/new' class="btn btn-primary">Add</a></td>
                 </tr>
                 )
     })
@@ -113,8 +121,6 @@ class Index extends React.Component {
 
   </div>
 
-            <h3>Tired of planning a workout? Logout from below</h3>
-            <a href="/logout">Log out</a>
             </DefaultLayout>
         </body>
       </html>
