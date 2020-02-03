@@ -17,7 +17,7 @@ class Index extends React.Component {
 
     <header class="jumbotron my-4">
       <h1 class="display-3">Hi {this.props.username}!</h1>
-      <p class="lead">Your workout list looks empty, add workout?</p>
+      <p class="lead">Your swimming workout list looks empty, add workout?</p>
       <a href="/workout/new" class="btn btn-primary btn-lg">Add workout?</a>
     </header>
 
@@ -32,7 +32,9 @@ class Index extends React.Component {
       <th scope="col">Edit</th>
       <th scope="col">Delete</th>
       <th scope="col">Add more</th>
-
+    </tr>
+    <tr>
+        <td></td>
     </tr>
   </thead>
   <tbody>

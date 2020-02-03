@@ -1,18 +1,18 @@
 var React = require('react');
 
-class LayoutForLogin extends React.Component {
+class FormLayout extends React.Component {
   render() {
     return (
       <html>
           <head>
-            <meta charSet="utf-8"/>
+            <meta charset="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
-            <link rel="stylesheet" type="text/css" href="/style.css"/>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"/>
+            <link rel="stylesheet" type="text/css" href="/default.css"/>
             <link rel="icon" href="img/swim.jpg"/>
             <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-          <title>{this.props.title}</title>
+            <title>FlexSwim</title>
         </head>
     <body>
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
@@ -23,17 +23,23 @@ class LayoutForLogin extends React.Component {
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <a className="nav-link" href="#">About FlexSwim</a>
+                <a className="nav-link" href="/workout/new">Add Workout</a>
+              </li>
+                <li className="nav-item">
+                <a className="nav-link" href="/">Show All Workouts</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#">Contact</a>
+                <a className="nav-link" href="#">About FlexSwim</a>
               </li>
         </ul>
+            <span className="navbar-text">
+
+            </span>
             <span className="nav-item">
-                <a className="nav-link" href="/register">Register</a>
+                <a className="nav-link" href="#"></a>
             </span>
               <span className="nav-item">
-                <a className="nav-link" href="/login">Login</a>
+                <a className="nav-link" href="/logout">Logout</a>
               </span>
       </div>
     </nav>
@@ -48,4 +54,4 @@ class LayoutForLogin extends React.Component {
   }
 }
 
-module.exports = LayoutForLogin;
+module.exports = FormLayout;

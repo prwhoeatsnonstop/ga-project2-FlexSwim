@@ -1,0 +1,19 @@
+html,body{
+background-image: url('img/swimbackground.jpeg');
+background-size: cover;
+background-repeat: no-repeat;
+height: 100%;
+font-family: 'Numans', sans-serif;
+}
+
+.table.table-hover.table-bordered{
+	background-color: rgba(211,211,211, 0.7);
+}
+
+.form-horizontal{
+	background-color: rgba(211,211,211, 0.7);
+}
+
+.footer-copyright{
+	font-weight: bold;
+}

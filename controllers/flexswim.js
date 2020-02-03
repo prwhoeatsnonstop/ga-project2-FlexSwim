@@ -74,7 +74,7 @@ module.exports = (db) => {
             }
       });
     } else {
-        response.send('wrong user!');
+        response.send('You do not have access to the content!');
     }
   };
 
@@ -163,7 +163,7 @@ module.exports = (db) => {
         // SELECT about user based on id
         response.render('flexswim/new', data);
     } else {
-        response.send('wrong user!');
+        response.send('You do not have access to the content!');
     }
   };
 
@@ -213,7 +213,7 @@ module.exports = (db) => {
             };
         });
     } else {
-        response.send('wrong user!');
+        response.send('You do not have access to the content!');
     }
   };
 

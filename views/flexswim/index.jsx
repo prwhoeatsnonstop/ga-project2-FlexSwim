@@ -46,7 +46,7 @@ class Index extends React.Component {
     </header>
 
     <div>
-                <table class="table table-hover table-bordered ">
+                <table class="table table-hover table-bordered">
   <thead>
     <tr>
       <th scope="col">Strokes</th>

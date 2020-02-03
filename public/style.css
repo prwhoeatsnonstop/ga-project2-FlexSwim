@@ -270,3 +270,7 @@ input[type=text]:placeholder {
 #icon {
   width:60%;
 }
+
+.footer-copyright{
+	font-weight: bold;
+}
