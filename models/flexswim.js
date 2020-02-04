@@ -39,6 +39,7 @@ let checkUser = (user, callback) => {
         } else {
             if (queryResult.rows.length > 0) {
                 callback(null, queryResult.rows[0]);
+                console.log(queryResult.rows[0].name + ' checkUser?');
             } else {
                 callback(null, null);
             }
@@ -67,6 +68,7 @@ let checkUser = (user, callback) => {
     });
   };
 
+
     let login = (user, callback) => {
     // set up query
     console.log(user);
@@ -77,7 +79,7 @@ let checkUser = (user, callback) => {
             if (error) {
                 console.log('in models');
             } else {
-                console.log('login form issue');
+                console.log('user name not found!');
                     if (queryResult.rows.length > 0) {
                         console.log('after query.result.rows.length');
                         callback(null, queryResult);

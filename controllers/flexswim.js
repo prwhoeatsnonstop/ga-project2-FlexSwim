@@ -84,29 +84,6 @@ module.exports = (db) => {
     response.render('flexswim/register');
   };
 
-//FOR POST'S ('/REGISTER') PATH
-//   let register = (request, response) => {
-//     //the username here is same with the queryResult in register's dbPoolInstance
-//     db.flexswim.register(request.body, (error, username) => {
-//         console.log(username);
-//         if (error) {
-//             console.log("Error", error);
-//             response.status(404).send('error', error);
-//         }
-//         if (username.rowCount = 1) {
-//             let user_id = username.rows[0].id;
-//             let hashedUser = sha256(user_id+SALT);
-//             response.cookie('username', username.rows[0].name);
-//             response.cookie('loggedIn', hashedUser);
-//             response.cookie('userId', user_id);
-//             response.redirect('/home');
-//         } else {
-//           console.log('User could not be created');
-//           response.send('Username has been taken, pick a new username')
-//         }
-//         });
-// };
-
 
   let register = (request, response) => {
 
@@ -147,43 +124,31 @@ module.exports = (db) => {
     response.render('flexswim/login');
   };
 
-//FOR POST'S ('/LOGIN') PATH
+
+
   let login = (request, response) => {
-    //the loginName here is same with the queryResult in login's dbPoolInstance
-    db.flexswim.login(request.body, (error, loginName) => {
-        console.log(loginName);
+
+    db.flexswim.checkUser(request.body, (error, result) => {
         if (error) {
-            console.log("Error", error);
+            console.log("error yayayaya");
             response.status(404).send('error', error);
-        } else {
-            if (loginName.rowCount[0] === 0) {
-                response.send('Empty Result');
+        }   if (result === null) {
+            response.send('Not such user!');
+        } else if (result.name === request.body.name && result.password === sha256(request.body.password + SALT)) {
+                console.log(result);
+                let user_id = result.id;
+                let hashedUser = sha256(user_id+SALT);
+                response.cookie('username', result.name);
+                response.cookie('loggedIn', hashedUser);
+                response.cookie('userId', user_id);
+                response.redirect('/home');
             } else {
-                if (loginName.rowCount[0] === 0) {
-                    response.send('Nothing here!')
-                } else {
-                    console.log('papaya');
-                    console.log(loginName);
-                        let hashedRequestPw = sha256(request.body.password + SALT);
-                        //TODO: ensure correct username and password are being type
-                        // let username = request.body.name;
-                        // console.log(username);
-                        if (loginName.rows[0].password === hashedRequestPw) {
-                            console.log(loginName.rows[0].password)
-                            let user_id = loginName.rows[0].id;
-                            let hashedUser = sha256(user_id+SALT);
-                            response.cookie('username', request.body.name);
-                            response.cookie('loggedIn', hashedUser);
-                            response.cookie('userId', user_id);
-                            response.redirect('/home');
-                        } else {
-                        response.send('Incorrect Password!');
-                        }
-                }
+                console.log('Wrong password!');
+                response.send('Wrong password!')
             }
-        }
     });
-  };
+};
+
 
 // ┌─┐┌┬┐┌┬┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐
 // ├─┤ ││ ││  ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │
