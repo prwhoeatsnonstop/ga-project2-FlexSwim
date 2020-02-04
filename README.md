@@ -1,6 +1,6 @@
 # Project #2: Building Your First Full-Stack Application
 
-Title: FlexSwim
+## Title: FlexSwim
 
 Concept Design
 
