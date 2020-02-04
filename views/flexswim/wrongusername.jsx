@@ -1,7 +1,7 @@
 var React = require("react");
 var DefaultLayout = require('../layouts/layoutforlogin');
 
-class Register extends React.Component {
+class WrongUser extends React.Component {
   render() {
     return (
       <html>
@@ -17,12 +17,17 @@ class Register extends React.Component {
       <img src="img/user.png" id="icon" alt="User Icon"/>
     </div>
 
-    <form action="/register" method="POST">
+    <form action="/login" method="POST">
       <input type="text" id="login" className="fadeIn second" name="name" placeholder="username" required/>
+            <div class="help-block" style={{color: 'red', fontWeight: 'bold'}}>Invalid Username!</div>
       <input type="text" id="password" className="fadeIn third" name="password" placeholder="password" required/>
-      <input type="submit" className="fadeIn fourth" value="Register"/>
+
+      <input type="submit" className="fadeIn fourth" value="Log In"/>
     </form>
 
+    <div id="formFooter">
+      <a className="underlineHover" href="/register">Don't have an account? Register here</a>
+    </div>
 
   </div>
 </div>
@@ -32,4 +37,4 @@ class Register extends React.Component {
   }
 }
 
-module.exports = Register;
+module.exports = WrongUser;

@@ -1,7 +1,7 @@
 var React = require("react");
 var DefaultLayout = require('../layouts/layoutforlogin');
 
-class Register extends React.Component {
+class DuplicateUser extends React.Component {
   render() {
     return (
       <html>
@@ -19,6 +19,7 @@ class Register extends React.Component {
 
     <form action="/register" method="POST">
       <input type="text" id="login" className="fadeIn second" name="name" placeholder="username" required/>
+      <span class="help-block" style={{color: 'red', fontWeight: 'bold'}}>Username taken! Create new one! </span>
       <input type="text" id="password" className="fadeIn third" name="password" placeholder="password" required/>
       <input type="submit" className="fadeIn fourth" value="Register"/>
     </form>
@@ -32,4 +33,4 @@ class Register extends React.Component {
   }
 }
 
-module.exports = Register;
+module.exports = DuplicateUser;

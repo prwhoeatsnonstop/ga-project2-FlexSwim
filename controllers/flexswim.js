@@ -93,7 +93,8 @@ module.exports = (db) => {
             response.status(404).send('error', error);
         } if (result !== null) {
             console.log('Error coz same username');
-            response.send("Username has been taken, create a new one!")
+            response.render('flexswim/duplicateuser');
+            // response.send("Username has been taken, create a new one!")
         } else {
             db.flexswim.register(request.body, (error, username) => {
                 console.log(username);
@@ -111,7 +112,8 @@ module.exports = (db) => {
                     }
                     else {
                         console.log('User could not be created');
-                        response.send('Username has been taken, pick a new username')
+                        // response.render('/')
+                        response.send('Username has been taken, pick a new username');
                     }
         });
         }
@@ -133,7 +135,8 @@ module.exports = (db) => {
             console.log("error yayayaya");
             response.status(404).send('error', error);
         }   if (result === null) {
-            response.send('Not such user!');
+            response.render('flexswim/wrongusername');
+            // response.send('Not such user!');
         } else if (result.name === request.body.name && result.password === sha256(request.body.password + SALT)) {
                 console.log(result);
                 let user_id = result.id;
@@ -144,7 +147,8 @@ module.exports = (db) => {
                 response.redirect('/home');
             } else {
                 console.log('Wrong password!');
-                response.send('Wrong password!')
+                response.render('flexswim/wrongpassword');
+                // response.send('Wrong password!');
             }
     });
 };
