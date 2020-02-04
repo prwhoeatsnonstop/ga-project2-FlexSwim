@@ -17,6 +17,15 @@ Provide an app that gives swimmers flexibility to choose from planned swimming w
 3. As a swimmer, I want to know which stroke I should pay more attention to as I may have neglected some strokes
 4. As a swimmer, I want to edit/delete my workout schedule so that it fits my current working schedule
 
+#User-Flow
+https://files.slack.com/files-pri/T0351JZQ0-FT9S8F56G/img_20200129_232139.jpg
+
+#Wireframing
+
+
+#ERD
+https://www.lucidchart.com/documents/edit/b301538d-20f9-4de3-a2f3-10dc266ff93a/0_0
+
 # Build a RESTful Interface using express
 
 # Resources
