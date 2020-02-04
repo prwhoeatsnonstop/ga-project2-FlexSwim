@@ -27,10 +27,17 @@ https://files.slack.com/files-pri/T0351JZQ0-FT9S8F56G/img_20200129_232139.jpg
 https://www.lucidchart.com/documents/edit/b301538d-20f9-4de3-a2f3-10dc266ff93a/0_0
 
 # Build a RESTful Interface using express
+URL	HTTP Verb	Action	Purpose
+'/' GET main Landing page
+'/show'	GET	index	See all swim workouts
+'/workout/new'	GET	new	Display the form for a single swim workout
+'/workout'	POST	create	Create a new swim workout
+'/workout/:id'	GET	show	See a single swim workout
+'/workout/:id/edit'	GET	edit	Display the form for editing a single swim workout
+'/workout/:id'	PATCH/PUT	update	Update a swim workout
+'/workout/:id'	DELETE	destroy	Remove a swim workout
 
 # Resources
-
-# Layout for Login/Register
 - https://bootsnipp.com/snippets/dldxB (login)
 - https://mdbootstrap.com/docs/jquery/navigation/footer/ (footer)
 - https://startbootstrap.com/previews/heroic-features/ (default layout)
