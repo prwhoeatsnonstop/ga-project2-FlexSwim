@@ -44,57 +44,57 @@ class Layout extends React.Component {
       </div>
     </nav>
             {this.props.children}
-  <div class="container" align="center">
-<div class="row text-center">
+  <div className="container" align="center">
+<div className="row text-center">
 
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt="image"/>
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+      <div className="col-lg-3 col-md-6 mb-4">
+        <div className="card h-100">
+          <img className="card-img-top" src="http://placehold.it/500x325" alt="image"/>
+          <div className="card-body">
+            <h4 className="card-title">Card Title</h4>
+            <p className="card-text">This is where you see your swimming workouts.</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
+          <div className="card-footer">
+            <a href="/" className="btn btn-primary">Find Out More!</a>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt=""/>
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
+      <div className="col-lg-3 col-md-6 mb-4">
+        <div className="card h-100">
+          <img className="card-img-top" src="http://placehold.it/500x325" alt=""/>
+          <div className="card-body">
+            <h4 className="card-title">Card title</h4>
+            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt=""/>
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
+          <div className="card-footer">
+            <a href="#" className="btn btn-primary">Find Out More!</a>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="http://placehold.it/500x325" alt=""/>
-          <div class="card-body">
-            <h4 class="card-title">Card title</h4>
-            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
+      <div className="col-lg-3 col-md-6 mb-4">
+        <div className="card h-100">
+          <img className="card-img-top" src="http://placehold.it/500x325" alt=""/>
+          <div className="card-body">
+            <h4 className="card-title">Card title</h4>
+            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
           </div>
-          <div class="card-footer">
-            <a href="#" class="btn btn-primary">Find Out More!</a>
+          <div className="card-footer">
+            <a href="#" className="btn btn-primary">Find Out More!</a>
+          </div>
+        </div>
+      </div>
+
+      <div className="col-lg-3 col-md-6 mb-4">
+        <div className="card h-100">
+          <img className="card-img-top" src="http://placehold.it/500x325" alt=""/>
+          <div className="card-body">
+            <h4 className="card-title">Card title</h4>
+            <p className="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
+          </div>
+          <div className="card-footer">
+            <a href="#" className="btn btn-primary">Find Out More!</a>
           </div>
         </div>
       </div>
@@ -103,8 +103,8 @@ class Layout extends React.Component {
 </div>
 
         </body>
-        <footer class="page-footer font-small blue">
-            <div class="footer-copyright text-center py-3">© 2020 Copyright: Made by foodie who swims
+        <footer className="page-footer font-small blue">
+            <div className="footer-copyright text-center py-3">© 2020 Copyright: Made by foodie who swims
             </div>
 
         </footer>

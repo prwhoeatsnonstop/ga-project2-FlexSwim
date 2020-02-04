@@ -101,6 +101,7 @@ module.exports = (db) => {
             response.redirect('/');
         } else {
           console.log('User could not be created');
+          response.send('Username has been taken, pick a new username')
         }
         });
 };

@@ -14,9 +14,11 @@ class Logout extends React.Component {
 <div className="wrapper fadeInDown">
   <div id="formContent">
     <div className="fadeIn first">
-        <h3>You've successfully logout!</h3>
+        <h3><span style={{color: 'white'}}>You've successfully logout!</span></h3>
       <img src="img/seeyousoon.jpg" alt="User Icon" width="200" height="100"/>
-      <h3>But if you change your mind, you can always login from below 🏊</h3>
+      <h3>
+        <span style={{color: 'white'}}>But if you change your mind, you can always login from below 🏊</span>
+      </h3>
     </div>
 
     <form action="/login" method="POST">

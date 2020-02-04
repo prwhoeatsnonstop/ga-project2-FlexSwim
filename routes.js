@@ -15,11 +15,17 @@ module.exports = (app, allModels) => {
   // require the controller
   const flexswimControllerCallbacks = require('./controllers/flexswim')(allModels);
 
+//LANDING PAGE
   app.get('/landing', flexswimControllerCallbacks.landing);
+
+//SHOW ALL WORKOUT PAGE
   app.get('/', flexswimControllerCallbacks.index);
 
-//HOME PAGE OF USER
-  app.get('/home', flexswimControllerCallbacks.home);
+
+
+//ABOUT PAGE/INTRO PAGE ON THIS APP
+  // app.get('/about/', flexswimControllerCallbacks.about);
+
 
 //REGISTER
   app.get('/register', flexswimControllerCallbacks.registerForm);
@@ -56,17 +62,12 @@ module.exports = (app, allModels) => {
   app.get('/workout/:id/edit', flexswimControllerCallbacks.editForm);
   app.put('/workout/:id', flexswimControllerCallbacks.editPut);
 
-
+//HOME PAGE OF USER
+  app.get('/home', flexswimControllerCallbacks.home);
 // ┌┬┐┌─┐┬  ┌─┐┌┬┐┌─┐  ┌─┐┌─┐┬─┐┌─┐┌─┐┌┐┌┌─┐┬    ┬ ┬┌─┐┬─┐┬┌─┌─┐┬ ┬┌┬┐┌─┐
 //  ││├┤ │  ├┤  │ ├┤   ├─┘├┤ ├┬┘└─┐│ ││││├─┤│    ││││ │├┬┘├┴┐│ ││ │ │ └─┐
 // ─┴┘└─┘┴─┘└─┘ ┴ └─┘  ┴  └─┘┴└─└─┘└─┘┘└┘┴ ┴┴─┘  └┴┘└─┘┴└─┴ ┴└─┘└─┘ ┴ └─┘
 
   app.delete('/workout/:id', flexswimControllerCallbacks.deleteWorkOut);
 
-  // app.get('/about/', flexswimControllerCallbacks.about);
-
-
-
-  // app.get('/addfollower', flexswimControllerCallbacks.followerForm);
-  // app.post('/addfollower', flexswimControllerCallbacks.follower);
 };

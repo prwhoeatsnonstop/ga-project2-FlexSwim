@@ -29,19 +29,19 @@ class New extends React.Component {
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="distance" class="col-sm-3 control-label">Distance (NUMBERS ONLY, in metres)</label>
+                    <label for="distance" class="col-sm-3 control-label">Distance (in metres)</label>
                     <div class="col-sm-9">
                         <input type="number" name="distance" placeholder="Eg: 50" class="form-control" required autofocus/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="duration" class="col-sm-3 control-label">Duration (NUMBERS ONLY, in minutes)</label>
+                    <label for="duration" class="col-sm-3 control-label">Duration (in minutes)</label>
                     <div class="col-sm-9">
                         <input type="number" name="duration" placeholder="Eg: 5" class="form-control" required autofocus/>
                     </div>
                 </div>
                 <div class="form-group">
-                    <div class="col-sm-9 col-sm-offset-3">
+                    <div class="col-sm-2 col-sm-offset-3">
                         <button type="submit" class="btn btn-primary btn-block">Submit</button>
                     </div>
                 </div>

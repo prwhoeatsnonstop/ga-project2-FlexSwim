@@ -1,6 +1,6 @@
 var React = require('react');
 
-class LayoutForLogin extends React.Component {
+class LayoutforLanding extends React.Component {
   render() {
     return (
       <html>
@@ -8,7 +8,7 @@ class LayoutForLogin extends React.Component {
             <meta charSet="utf-8"/>
             <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossOrigin="anonymous"/>
-            <link rel="stylesheet" type="text/css" href="/style.css"/>
+    <link rel="stylesheet" type="text/css" href="/one-page.css"/>
             <link rel="icon" href="img/swim.jpg"/>
             <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
             <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -22,6 +22,9 @@ class LayoutForLogin extends React.Component {
       </button>
       <div className="collapse navbar-collapse" id="navbarText">
         <ul className="navbar-nav mr-auto">
+              <li className="nav-item">
+                <a className="nav-link" href="#">Contact</a>
+              </li>
         </ul>
             <span className="nav-item">
                 <a className="nav-link" href="/register">Register</a>
@@ -34,9 +37,7 @@ class LayoutForLogin extends React.Component {
             {this.props.children}
         </body>
         <footer class="page-footer font-small blue">
-            <div class="footer-copyright text-center py-3">
-        <span style={{color: 'white'}}>© 2020 Copyright: Made by foodie who swims</span>
-
+            <div class="footer-copyright text-center py-3">© 2020 Copyright: Made by foodie who swims
             </div>
         </footer>
       </html>
@@ -44,4 +45,4 @@ class LayoutForLogin extends React.Component {
   }
 }
 
-module.exports = LayoutForLogin;
+module.exports = LayoutforLanding;
