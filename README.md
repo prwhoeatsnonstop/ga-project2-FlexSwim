@@ -1,4 +1,4 @@
-Project #2: Building Your First Full-Stack Application
+# Project #2: Building Your First Full-Stack Application
 
 #Title: FlexSwim
 
