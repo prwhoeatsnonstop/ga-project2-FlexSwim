@@ -55,6 +55,7 @@ class Edit  extends React.Component {
                       </DefaultLayout>
 
         </body>
+
       </html>
     );
   }

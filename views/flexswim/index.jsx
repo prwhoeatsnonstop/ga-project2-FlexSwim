@@ -123,7 +123,10 @@ class Index extends React.Component {
   </div>
 
             </DefaultLayout>
+
         </body>
+
+
       </html>
     );
   }

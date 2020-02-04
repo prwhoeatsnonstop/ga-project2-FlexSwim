@@ -32,12 +32,7 @@ class LayoutForLogin extends React.Component {
     </nav>
             {this.props.children}
         </body>
-        <footer class="page-footer font-small blue">
-            <div class="footer-copyright text-center py-3">
-        <span style={{color: 'white'}}>© 2020 Copyright: Made by foodie who swims</span>
 
-            </div>
-        </footer>
       </html>
     );
   }

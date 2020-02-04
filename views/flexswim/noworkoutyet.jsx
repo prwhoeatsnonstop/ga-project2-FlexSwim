@@ -51,6 +51,7 @@ class Index extends React.Component {
 
                   </DefaultLayout>
         </body>
+
       </html>
     );
   }

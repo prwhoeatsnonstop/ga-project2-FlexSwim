@@ -49,6 +49,7 @@ class New extends React.Component {
         </div>
                       </DefaultLayout>
         </body>
+
       </html>
     );
   }
