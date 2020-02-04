@@ -16,4 +16,6 @@ font-family: 'Numans', sans-serif;
 
 .footer-copyright{
 	font-weight: bold;
+  text-align: center;
+  color: white;
 }
