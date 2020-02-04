@@ -19,24 +19,32 @@ module.exports = (dbPoolInstance) => {
 
     dbPoolInstance.query(query, (error, queryResult) => {
       if( error ){
-
-        // invoke callback function with results after query has executed
         callback(error, null);
-
       } else {
-
-        // invoke callback function with results after query has executed
-
         if( queryResult.rows.length > 0 ){
           callback(null, queryResult.rows);
-
         } else {
           callback(null, null);
-
         }
       }
     });
   };
+
+let checkUser = (user, callback) => {
+    let values = [user.name];
+    let queryString = 'SELECT * FROM users WHERE name = $1';
+    dbPoolInstance.query(queryString, values, (error, queryResult) => {
+        if (error) {
+            console.log('in models');
+        } else {
+            if (queryResult.rows.length > 0) {
+                callback(null, queryResult.rows[0]);
+            } else {
+                callback(null, null);
+            }
+        }
+    });
+};
 
   let register = (user, callback) => {
     // set up query
@@ -47,9 +55,15 @@ module.exports = (dbPoolInstance) => {
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
-                console.error('error');
-            } else
-            callback(null, queryResult);
+                console.log('in models');
+            } else {
+                    if (queryResult.rows.length > 0) {
+                        callback(null, queryResult.rows[0]);
+                        console.log(queryResult.rows[0]);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   };
 
@@ -61,10 +75,16 @@ module.exports = (dbPoolInstance) => {
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
-                console.error('error');
-            } else
-            callback(null, queryResult);
-            console.log(queryResult);
+                console.log('in models');
+            } else {
+                console.log('login form issue');
+                    if (queryResult.rows.length > 0) {
+                        console.log('after query.result.rows.length');
+                        callback(null, queryResult);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   };
 
@@ -78,12 +98,19 @@ module.exports = (dbPoolInstance) => {
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
-                console.error('error');
-            } else
-                queryResult.date_formatted = moment(queryResult.date_created).fromNow();
-                callback(null, queryResult);
+                console.log('in models');
+            } else {
+                    if (queryResult.rows.length > 0) {
+                        queryResult.date_formatted = moment(queryResult.date_created).fromNow();
+                        callback(null, queryResult);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   };
+
+
 
 //SHOW ALL WORKOUTS OF CURRENT USER (FOR INDEX IN CONTROLLER)
   let showAll = (user, callback) => {
@@ -92,9 +119,14 @@ module.exports = (dbPoolInstance) => {
     let queryString = 'SELECT * FROM personal_strokes WHERE user_id=$1';
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
-                console.error('error');
-            } else
-            callback(null, queryResult);
+                console.log('in models');
+            } else {
+                    if (queryResult.rows.length > 0) {
+                        callback(null, queryResult);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   };
 
@@ -104,11 +136,15 @@ module.exports = (dbPoolInstance) => {
     console.log(workOut, user)
     let queryString = 'SELECT personal_strokes.id, personal_strokes.stroke_type, users.name, personal_strokes.distance, personal_strokes.duration, personal_strokes.user_id, personal_strokes.date_created FROM personal_strokes INNER JOIN users ON personal_strokes.user_id = users.id WHERE personal_strokes.id=$1 AND users.id=$2;';
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
-        if (error) {
-            console.error('error');
-        } else
-            queryResult.date_formatted = moment(queryResult.date_created).fromNow();
-            callback(null, queryResult);
+            if (error) {
+                console.log('in models');
+            } else {
+                    if (queryResult.rows.length > 0) {
+                        callback(null, queryResult);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   };
 
@@ -123,10 +159,14 @@ module.exports = (dbPoolInstance) => {
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
-                console.error('error');
-            } else
-                queryResult.date_formatted = moment(queryResult.date_created).fromNow();
-                callback(null, queryResult);
+                console.log('in edit de models');
+            } else {
+                    if (queryResult.rows.length > 0) {
+                        callback(null, queryResult);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   };
 
@@ -142,10 +182,15 @@ module.exports = (dbPoolInstance) => {
         const values = [workoutId];
         dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
-                console.error('error');
-            } else
-                queryResult.date_formatted = moment(queryResult.date_created).fromNow();
-                callback(null, queryResult);
+                console.log('in models');
+            } else {
+                    if (queryResult.rows.length > 0) {
+                        queryResult.date_formatted = moment(queryResult.date_created).fromNow();
+                        callback(null, queryResult);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   }
 
@@ -158,17 +203,24 @@ module.exports = (dbPoolInstance) => {
     // execute query
     dbPoolInstance.query(queryString, values, (error, queryResult) => {
             if (error) {
-                console.error('error');
-            } else
-                queryResult.date_formatted = moment(queryResult.date_created).fromNow();
-                callback(null, queryResult);
+                console.log('in models');
+            } else {
+                    if (queryResult.rows.length > 0) {
+                        queryResult.date_formatted = moment(queryResult.date_created).fromNow();
+                        callback(null, queryResult.rows[0]);
+                    } else {
+                        callback(null, null);
+                    }
+            }
     });
   };
+
 
 
   return {
     getAllUsers: getAllUsers,
     register: register,
+    checkUser: checkUser,
     login: login,
     newWorkOut: newWorkOut,
     showAll: showAll,

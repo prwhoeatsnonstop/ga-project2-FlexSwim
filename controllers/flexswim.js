@@ -12,6 +12,7 @@ module.exports = (db) => {
 
 //LANDING PAGE FOR USER TO LOGIN/REGISTER
   let landing = (request, response) => {
+    console.log('hello');
         response.render('flexswim/login');
   };
 
@@ -84,27 +85,62 @@ module.exports = (db) => {
   };
 
 //FOR POST'S ('/REGISTER') PATH
+//   let register = (request, response) => {
+//     //the username here is same with the queryResult in register's dbPoolInstance
+//     db.flexswim.register(request.body, (error, username) => {
+//         console.log(username);
+//         if (error) {
+//             console.log("Error", error);
+//             response.status(404).send('error', error);
+//         }
+//         if (username.rowCount = 1) {
+//             let user_id = username.rows[0].id;
+//             let hashedUser = sha256(user_id+SALT);
+//             response.cookie('username', username.rows[0].name);
+//             response.cookie('loggedIn', hashedUser);
+//             response.cookie('userId', user_id);
+//             response.redirect('/home');
+//         } else {
+//           console.log('User could not be created');
+//           response.send('Username has been taken, pick a new username')
+//         }
+//         });
+// };
+
+
   let register = (request, response) => {
-    //the username here is same with the queryResult in register's dbPoolInstance
-    db.flexswim.register(request.body, (error, username) => {
-        console.log(username);
+
+    db.flexswim.checkUser(request.body, (error, result) => {
         if (error) {
-            console.log("Error", error);
+            console.log("error yayayaya");
             response.status(404).send('error', error);
-        }
-        if (username.rowCount = 1) {
-            let user_id = username.rows[0].id;
-            let hashedUser = sha256(user_id+SALT);
-            response.cookie('username', username.rows[0].name);
-            response.cookie('loggedIn', hashedUser);
-            response.cookie('userId', user_id);
-            response.redirect('/home');
+        } if (result !== null) {
+            console.log('Error coz same username');
+            response.send("Username has been taken, create a new one!")
         } else {
-          console.log('User could not be created');
-          response.send('Username has been taken, pick a new username')
-        }
+            db.flexswim.register(request.body, (error, username) => {
+                console.log(username);
+                if (error) {
+                    console.log("Error after register");
+                    response.status(404).send('error', error);
+                }
+                    if (username.rowCount = 1) {
+                        let user_id = username.id;
+                        let hashedUser = sha256(user_id+SALT);
+                        response.cookie('username', username.name);
+                        response.cookie('loggedIn', hashedUser);
+                        response.cookie('userId', user_id);
+                        response.redirect('/home');
+                    }
+                    else {
+                        console.log('User could not be created');
+                        response.send('Username has been taken, pick a new username')
+                    }
         });
+        }
+    })
 };
+
 
 //FOR GET'S ('/LOGIN') PATH
   let loginForm = (request, response) => {
@@ -120,17 +156,20 @@ module.exports = (db) => {
             console.log("Error", error);
             response.status(404).send('error', error);
         } else {
-            if (loginName.rowCount.length === 0) {
+            if (loginName.rowCount[0] === 0) {
                 response.send('Empty Result');
             } else {
                 if (loginName.rowCount[0] === 0) {
                     response.send('Nothing here!')
                 } else {
+                    console.log('papaya');
+                    console.log(loginName);
                         let hashedRequestPw = sha256(request.body.password + SALT);
                         //TODO: ensure correct username and password are being type
                         // let username = request.body.name;
                         // console.log(username);
                         if (loginName.rows[0].password === hashedRequestPw) {
+                            console.log(loginName.rows[0].password)
                             let user_id = loginName.rows[0].id;
                             let hashedUser = sha256(user_id+SALT);
                             response.cookie('username', request.body.name);
@@ -257,7 +296,7 @@ module.exports = (db) => {
           response.sendStatus(500);
         }   else {
                 console.log('Workout updated successfully');
-                console.log(queryResult.rows[0]);
+                console.log(queryResult);
                 response.redirect('/show');
         }
 
@@ -284,7 +323,7 @@ module.exports = (db) => {
                 response.sendStatus(500);
             } else {
                 console.log('Workout deleted successfully');
-                console.log(queryResult.rows[0]);
+                console.log(queryResult);
                 response.redirect('/show');
             }
         });
@@ -311,7 +350,7 @@ module.exports = (db) => {
                 response.sendStatus(500);
             } else {
                 console.log('Workout done!');
-                console.log(queryResult.rows[0]);
+                console.log(queryResult);
                 response.redirect('/show');
             }
         });
