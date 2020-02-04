@@ -124,7 +124,7 @@ let checkUser = (user, callback) => {
                     if (queryResult.rows.length > 0) {
                         callback(null, queryResult);
                     } else {
-                        callback(null, null);
+                        callback(null, queryResult);
                     }
             }
     });
