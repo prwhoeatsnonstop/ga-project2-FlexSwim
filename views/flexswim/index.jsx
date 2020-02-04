@@ -62,7 +62,8 @@ class Index extends React.Component {
       <html>
         <head />
             <title>
-            Index Page
+            Show All
+
             </title>
         <body>
         <DefaultLayout title={this.props.title}>

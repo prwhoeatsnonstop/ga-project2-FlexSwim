@@ -15,7 +15,7 @@ class Edit  extends React.Component {
         <div class="container" align="center">
                     <header class="jumbotron my-4">
       <h1 class="display-3">Hi {this.props.username}!</h1>
-      <p class="lead">You may add edit workout in the below form.</p>
+      <p class="lead">You may add edit your swim workout in the below form.</p>
     </header>
             <form className="form-horizontal" role="form" method="POST" action={url}>
                 <h2> Edit </h2>

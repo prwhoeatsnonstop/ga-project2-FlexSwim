@@ -4,7 +4,12 @@
   "description": "Project #2: Building Your First Full-Stack Application",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+     "start": "node index.js"
+  },
+
+    "engines" : {
+    "node" : "^12.x"
   },
   "repository": {
     "type": "git",

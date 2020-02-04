@@ -12,7 +12,7 @@ class New extends React.Component {
         <div class="container" align="center">
             <header class="jumbotron my-4">
       <h1 class="display-3">Hi {this.props.username}!</h1>
-      <p class="lead">You may add new workout in the below form.</p>
+      <p class="lead">You may add new swim workout in the below form.</p>
     </header>
             <form class="form-horizontal" role="form" method="POST" action="/workout">
                 <h2> Add </h2>

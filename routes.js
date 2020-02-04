@@ -16,10 +16,10 @@ module.exports = (app, allModels) => {
   const flexswimControllerCallbacks = require('./controllers/flexswim')(allModels);
 
 //LANDING PAGE
-  app.get('/landing', flexswimControllerCallbacks.landing);
+  app.get('/', flexswimControllerCallbacks.landing);
 
 //SHOW ALL WORKOUT PAGE
-  app.get('/', flexswimControllerCallbacks.index);
+  app.get('/show', flexswimControllerCallbacks.index);
 
 
 

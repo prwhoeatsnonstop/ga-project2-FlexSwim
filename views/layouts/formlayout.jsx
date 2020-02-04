@@ -26,10 +26,10 @@ class FormLayout extends React.Component {
                 <a className="nav-link" href="/home">Home</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="/workout/new">Add Workout</a>
+                <a className="nav-link" href="/workout/new">Add</a>
               </li>
                 <li className="nav-item">
-                <a className="nav-link" href="/">Show All Workouts</a>
+                <a className="nav-link" href="/show">Show All</a>
               </li>
         </ul>
             <span className="navbar-text">

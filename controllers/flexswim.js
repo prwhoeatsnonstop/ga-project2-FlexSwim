@@ -98,7 +98,7 @@ module.exports = (db) => {
             response.cookie('username', username.rows[0].name);
             response.cookie('loggedIn', hashedUser);
             response.cookie('userId', user_id);
-            response.redirect('/');
+            response.redirect('/home');
         } else {
           console.log('User could not be created');
           response.send('Username has been taken, pick a new username')
@@ -183,7 +183,7 @@ module.exports = (db) => {
                 name: request.cookies.username,
                 workout: queryResult.rows[0]
                 }
-                response.redirect('/');
+                response.redirect('/show');
             } else {
                 console.log('workout could not be created');
                 response.render('flexswim/new');
@@ -258,7 +258,7 @@ module.exports = (db) => {
         }   else {
                 console.log('Workout updated successfully');
                 console.log(queryResult.rows[0]);
-                response.redirect('/');
+                response.redirect('/show');
         }
 
       });
@@ -285,7 +285,7 @@ module.exports = (db) => {
             } else {
                 console.log('Workout deleted successfully');
                 console.log(queryResult.rows[0]);
-                response.redirect('/');
+                response.redirect('/show');
             }
         });
     } else {
@@ -312,7 +312,7 @@ module.exports = (db) => {
             } else {
                 console.log('Workout done!');
                 console.log(queryResult.rows[0]);
-                response.redirect('/');
+                response.redirect('/show');
             }
         });
     } else {
